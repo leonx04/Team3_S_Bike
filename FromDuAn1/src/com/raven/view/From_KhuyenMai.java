@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class From_KhuyenMai extends javax.swing.JPanel {
 
-    
     public From_KhuyenMai() {
         initComponents();
         tbModel = (DefaultTableModel) tblKhuyenMai.getModel();
@@ -21,9 +20,8 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     List<KhuyenMai> listKhuyenMai = new ArrayList<>();
     DefaultTableModel tbModel = new DefaultTableModel();
     KhuyenMai_repository repo = new KhuyenMai_repository();
-    
-    
-    void loadData(){
+
+    void loadData() {
         tbModel.setRowCount(0);
         listKhuyenMai = repo.getAllKM();
         for (KhuyenMai km : listKhuyenMai) {
@@ -32,10 +30,11 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 km.getMaKM(),
                 km.getGiaTriPhanTram(),
                 km.getGiaTriTienMat(),
-                km.getTrangthai() ? "Còn hạn":"Hết hạn"
+                km.getTrangthai() ? "Còn hạn" : "Hết hạn"
             });
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

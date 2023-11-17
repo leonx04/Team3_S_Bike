@@ -16,7 +16,6 @@ import javax.swing.JComponent;
  * @author RAVEN
  */
 public class Main extends javax.swing.JFrame {
-    
 
     /**
      * Creates new form Main
@@ -25,33 +24,33 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(Main.this);
-        menu.addEventMenuSelected(new EventMenuSelected(){
+        menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
 //                System.out.println(""+index);
                 if (index == 1) {
- 
-                }else if(index == 3){
 
-                }else if(index ==9){
-                    
-                }else if(index ==11){
+                } else if (index == 3) {
+
+                } else if (index == 9) {
+
+                } else if (index == 11) {
                     setFrom(new JPanel_SanPham());
-                    
-                }else if(index ==13){
-                    
-                }else if(index ==15){
-                    
-                }else if(index ==17){
-                    
-                }else if(index ==19){
+                } else if (index == 13) {
+
+                } else if (index == 15) {
+
+                } else if (index == 17) {
+
+                } else if (index == 19) {
                     setFrom(new From_KhuyenMai());
                 }
-         }
-            
+            }
+
         });
     }
-        private void setFrom(JComponent com){
+
+    private void setFrom(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);
         mainPanel.repaint();
