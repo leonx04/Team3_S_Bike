@@ -4,19 +4,38 @@
  */
 package com.raven.view;
 
-/**
- *
- * @author MSI
- */
+import com.raven.repository.KhuyenMai_repository;
+import com.raven.swing.KhuyenMai;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 public class From_KhuyenMai extends javax.swing.JPanel {
 
-    /**
-     * Creates new form From_KhuyenMai
-     */
+    
     public From_KhuyenMai() {
         initComponents();
+        tbModel = (DefaultTableModel) tblKhuyenMai.getModel();
+        loadData();
     }
-
+    List<KhuyenMai> listKhuyenMai = new ArrayList<>();
+    DefaultTableModel tbModel = new DefaultTableModel();
+    KhuyenMai_repository repo = new KhuyenMai_repository();
+    
+    
+    void loadData(){
+        tbModel.setRowCount(0);
+        listKhuyenMai = repo.getAllKM();
+        for (KhuyenMai km : listKhuyenMai) {
+            tbModel.addRow(new Object[]{
+                km.getID(),
+                km.getMaKM(),
+                km.getGiaTriPhanTram(),
+                km.getGiaTriTienMat(),
+                km.getTrangthai() ? "Còn hạn":"Hết hạn"
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +49,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         panelBorder1 = new com.raven.swing.PanelBorder();
         panelBorder2 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblKhuyenMai = new javax.swing.JTable();
         panelBorder3 = new com.raven.swing.PanelBorder();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -66,8 +85,9 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
         panelBorder2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -77,7 +97,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 "ID", "Mã khuyến mãi", "Giá trị phần trăm", "Giá trị tiền mặt", "Trạng thái"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblKhuyenMai);
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -363,7 +383,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -375,5 +394,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private com.raven.swing.PanelBorder panelBorder2;
     private com.raven.swing.PanelBorder panelBorder3;
     private com.raven.swing.PanelBorder panelBorder4;
+    private javax.swing.JTable tblKhuyenMai;
     // End of variables declaration//GEN-END:variables
 }
