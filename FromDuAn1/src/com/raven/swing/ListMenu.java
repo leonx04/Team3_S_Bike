@@ -1,5 +1,6 @@
 package com.raven.swing;
 
+import com.raven.event.EventMenuSelected;
 import com.raven.model.Model_Menu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -14,6 +15,10 @@ public class ListMenu<E extends Object> extends JList<E> {
 
     private final DefaultListModel model;
     private int selectedIndex = -1;
+    private EventMenuSelected event;
+    public void addEventMenuSelected(EventMenuSelected event){
+        this.event=event;
+    }
 
     public ListMenu() {
         model = new DefaultListModel();
@@ -28,9 +33,13 @@ public class ListMenu<E extends Object> extends JList<E> {
                         Model_Menu menu = (Model_Menu) o;
                         if (menu.getType() == Model_Menu.MenuType.MENU) {
                             selectedIndex = index;
+                            if(event!=null){
+                                event.selected(index);
+                            }
                         }
                     } else {
                         selectedIndex = index;
+                        
                     }
                     repaint();
                 }

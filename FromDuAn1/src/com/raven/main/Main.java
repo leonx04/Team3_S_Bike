@@ -5,7 +5,11 @@
  */
 package com.raven.main;
 
+import com.raven.event.EventMenuSelected;
+import com.raven.view.From_KhuyenMai;
+import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
+import javax.swing.JComponent;
 
 /**
  *
@@ -19,7 +23,38 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        menu1.initMoving(Main.this);
+        menu.initMoving(Main.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+//                System.out.println(""+index);
+                if (index == 1) {
+
+                } else if (index == 3) {
+
+                } else if (index == 9) {
+
+                } else if (index == 11) {
+                    setFrom(new JPanel_SanPham());
+                } else if (index == 13) {
+
+                } else if (index == 15) {
+
+                } else if (index == 17) {
+
+                } else if (index == 19) {
+                    setFrom(new From_KhuyenMai());
+                }
+            }
+
+        });
+    }
+
+    private void setFrom(JComponent com) {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
 
     /**
@@ -32,38 +67,28 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new com.raven.swing.PanelBorder();
-        menu1 = new com.raven.component.Menu();
+        menu = new com.raven.component.Menu();
         header2 = new com.raven.component.Header();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(249, 249, 249));
+        panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelBorder1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        panelBorder1.add(header2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 1320, -1));
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1331, Short.MAX_VALUE))
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 797, Short.MAX_VALUE))
-        );
+        mainPanel.setLayout(new java.awt.BorderLayout());
+        panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 50, 1320, 800));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +136,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.component.Header header2;
-    private com.raven.component.Menu menu1;
+    private javax.swing.JPanel mainPanel;
+    private com.raven.component.Menu menu;
     private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }
