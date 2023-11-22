@@ -1,127 +1,156 @@
 
 package com.raven.swing;
 
+import java.util.Date;
+
 public class KhuyenMai {
-    int ID;
-    String MaKM;
-    String GiaTriPhanTram;
-    int GiaTriTienMat;
-    String trangthai;
-    String NgayBatDau,NgayKetThuc,ngaytao,nguoitao,nguoisua,ngaysua,nguoixoa;
-
-    public String getNgayBatDau() {
-        return NgayBatDau;
-    }
-
-    public void setNgayBatDau(String NgayBatDau) {
-        this.NgayBatDau = NgayBatDau;
-    }
-
-    public String getNgayKetThuc() {
-        return NgayKetThuc;
-    }
-
-    public void setNgayKetThuc(String NgayKetThuc) {
-        this.NgayKetThuc = NgayKetThuc;
-    }
-
-    public String getNgaytao() {
-        return ngaytao;
-    }
-
-    public void setNgaytao(String ngaytao) {
-        this.ngaytao = ngaytao;
-    }
-
-    public String getNguoitao() {
-        return nguoitao;
-    }
-
-    public void setNguoitao(String nguoitao) {
-        this.nguoitao = nguoitao;
-    }
-
-    public String getNguoisua() {
-        return nguoisua;
-    }
-
-    public void setNguoisua(String nguoisua) {
-        this.nguoisua = nguoisua;
-    }
-
-    public String getNgaysua() {
-        return ngaysua;
-    }
-
-    public void setNgaysua(String ngaysua) {
-        this.ngaysua = ngaysua;
-    }
-
-    public String getNguoixoa() {
-        return nguoixoa;
-    }
-
-    public void setNguoixoa(String nguoixoa) {
-        this.nguoixoa = nguoixoa;
-    }
+    private String maKM;
+    private String tenKM;
+    private int soLuong;
+    private String hinhThuc;
+    private int mucGiamGia;
+    private Date thoiGianBatDau;
+    private Date thoiGianKetThuc;
+    private String moTa;
+    private String trangThai;
+    private Date createAt;
+    private String createBy;
+    private Date updateAt;
+    private String updateBy;
+    private String deletedBy;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(int ID, String MaKM, String GiaTriPhanTram, int GiaTriTienMat, String trangthai, String NgayBatDau, String NgayKetThuc, String ngaytao, String nguoitao, String nguoisua, String ngaysua, String nguoixoa) {
-        this.ID = ID;
-        this.MaKM = MaKM;
-        this.GiaTriPhanTram = GiaTriPhanTram;
-        this.GiaTriTienMat = GiaTriTienMat;
-        this.trangthai = trangthai;
-        this.NgayBatDau = NgayBatDau;
-        this.NgayKetThuc = NgayKetThuc;
-        this.ngaytao = ngaytao;
-        this.nguoitao = nguoitao;
-        this.nguoisua = nguoisua;
-        this.ngaysua = ngaysua;
-        this.nguoixoa = nguoixoa;
-    }
-
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+    public KhuyenMai(String maKM, String tenKM, int soLuong, String hinhThuc, int mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, String trangThai, Date createAt, String createBy, Date updateAt, String updateBy, String deletedBy) {
+        this.maKM = maKM;
+        this.tenKM = tenKM;
+        this.soLuong = soLuong;
+        this.hinhThuc = hinhThuc;
+        this.mucGiamGia = mucGiamGia;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+        this.createAt = createAt;
+        this.createBy = createBy;
+        this.updateAt = updateAt;
+        this.updateBy = updateBy;
+        this.deletedBy = deletedBy;
     }
 
     public String getMaKM() {
-        return MaKM;
+        return maKM;
     }
 
-    public void setMaKM(String MaKM) {
-        this.MaKM = MaKM;
+    public void setMaKM(String maKM) {
+        this.maKM = maKM;
     }
 
-    public String getGiaTriPhanTram() {
-        return GiaTriPhanTram;
+    public String getTenKM() {
+        return tenKM;
     }
 
-    public void setGiaTriPhanTram(String GiaTriPhanTram) {
-        this.GiaTriPhanTram = GiaTriPhanTram;
+    public void setTenKM(String tenKM) {
+        this.tenKM = tenKM;
     }
 
-    public int getGiaTriTienMat() {
-        return GiaTriTienMat;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setGiaTriTienMat(int GiaTriTienMat) {
-        this.GiaTriTienMat = GiaTriTienMat;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
-    public String getTrangthai() {
-        return trangthai;
+    public String getHinhThuc() {
+        return hinhThuc;
     }
 
-    public void setTrangthai(String trangthai) {
-        this.trangthai = trangthai;
+    public void setHinhThuc(String hinhThuc) {
+        this.hinhThuc = hinhThuc;
     }
-  
-}
+
+    public int getMucGiamGia() {
+        return mucGiamGia;
+    }
+
+    public void setMucGiamGia(int mucGiamGia) {
+        this.mucGiamGia = mucGiamGia;
+    }
+
+    public Date getThoiGianBatDau() {
+        return thoiGianBatDau;
+    }
+
+    public void setThoiGianBatDau(Date thoiGianBatDau) {
+        this.thoiGianBatDau = thoiGianBatDau;
+    }
+
+    public Date getThoiGianKetThuc() {
+        return thoiGianKetThuc;
+    }
+
+    public void setThoiGianKetThuc(Date thoiGianKetThuc) {
+        this.thoiGianKetThuc = thoiGianKetThuc;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    }
+
+    

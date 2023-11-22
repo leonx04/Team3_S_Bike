@@ -9,51 +9,129 @@ import com.raven.swing.KhuyenMai;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author MSI
  */
 public class KhuyenMai_repository {
-   public List<KhuyenMai> getAllKM(){
-       List<KhuyenMai>lst = new ArrayList<>();
-       try {
-           Connection con = DBConnect.getConnection();
-           Statement stm = con.createStatement();
-           ResultSet rs = stm.executeQuery("SELECT ID,MaKM,GiaTriPhanTram,GiaTriTienMat,TrangThai,NgayKetThuc,NgayBatDau,create_at,create_by,update_at,update_by,Deleted_by FROM KhuyenMai");
-           while (rs.next()) {               
-               int ID = rs.getInt(1);
-               String MaKM = rs.getString(2);
-               String GiaTriPhanTram = rs.getString(3);
-               int GiaTriTienMat = rs.getInt(4);
-               String trangthai = rs.getString(5);
-               String ngaybatdau =rs.getString(6);
-               String ngayketthuc =rs.getString(7);
-               String ngaytao = rs.getString(8);
-               String nguoitao = rs.getString(9);
-               String nguoisua = rs.getString(10);
-               String ngaysua = rs.getString(11);
-               String nguoixoa = rs.getString(12);                  
-               lst.add(new KhuyenMai(ID, MaKM, GiaTriPhanTram, GiaTriTienMat, trangthai,ngaybatdau,ngayketthuc,ngaysua,ngaytao,nguoisua,nguoitao,nguoixoa));   
-           }
-           rs.close();
-       } catch (Exception e) {
-       e.printStackTrace();
-       }
-       return lst;
-   }
-   public boolean Delete(String MaKM){
-        List<KhuyenMai>lst = new ArrayList<>();
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public List<KhuyenMai> getAllKM() {
+        List<KhuyenMai> lst = new ArrayList<>();
         try {
-           Connection con = DBConnect.getConnection();
-           String sql ="DELETE FROM KHUYENMAI WHERE MaMK=?";
-           PreparedStatement stm = con.prepareCall(sql);
-           stm.setString(1, sql);
-           stm.executeUpdate();
-           return true;
-       } catch (Exception e) {
-           e.printStackTrace();
-           return false;
-       }
-   }
+            Connection con = DBConnect.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(" SELECT MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by FROM KhuyenMai");
+            while (rs.next()) {
+                String MaKM = rs.getNString(1);
+                String TenKM = rs.getNString(2);
+                int SoLuong = rs.getInt(3);
+                String hinhThuc = rs.getNString(4);
+                int mucGiamGia = rs.getInt(5);
+                Date thoiGianBatDau = rs.getDate(6);
+                Date thoiGianKetThuc = rs.getDate(7);
+                String moTa = rs.getNString(8);
+                String trangthai = rs.getNString(9);
+                Date ngaytao = rs.getDate(10);
+                String nguoitao = rs.getNString(11);
+                Date ngaysua = rs.getDate(12);
+                String nguoisua = rs.getNString(13);
+                String nguoixoa = rs.getNString(14);
+                lst.add(new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, mucGiamGia, thoiGianBatDau, thoiGianKetThuc, moTa, trangthai, ngaytao, nguoitao, ngaysua, nguoisua, nguoixoa));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lst;
+    }
+
+        public List<KhuyenMai> getAllKMHetHan() {
+        List<KhuyenMai> lst = new ArrayList<>();
+        try {
+            Connection con = DBConnect.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(" SELECT MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by  FROM KhuyenMai WHERE TrangThai =N'Hết Hạn'");
+            while (rs.next()) {
+                String MaKM = rs.getNString(1);
+                String TenKM = rs.getNString(2);
+                int SoLuong = rs.getInt(3);
+                String hinhThuc = rs.getNString(4);
+                int mucGiamGia = rs.getInt(5);
+                Date thoiGianBatDau = rs.getDate(6);
+                Date thoiGianKetThuc = rs.getDate(7);
+                String moTa = rs.getNString(8);
+                String trangthai = rs.getNString(9);
+                Date ngaytao = rs.getDate(10);
+                String nguoitao = rs.getNString(11);
+                Date ngaysua = rs.getDate(12);
+                String nguoisua = rs.getNString(13);
+                String nguoixoa = rs.getNString(14);
+               lst.add(new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, mucGiamGia, thoiGianBatDau, thoiGianKetThuc, moTa, trangthai, ngaytao, nguoitao, ngaysua, nguoisua, nguoixoa));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lst;
+    }
+            public List<KhuyenMai> getAllKMconHan() {
+        List<KhuyenMai> lst = new ArrayList<>();
+        try {
+            Connection con = DBConnect.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(" SELECT MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by  FROM KhuyenMai WHERE TrangThai =N'Còn Hạn'");
+            while (rs.next()) {
+                String MaKM = rs.getNString(1);
+                String TenKM = rs.getNString(2);
+                int SoLuong = rs.getInt(3);
+                String hinhThuc = rs.getNString(4);
+                int mucGiamGia = rs.getInt(5);
+                Date thoiGianBatDau = rs.getDate(6);
+                Date thoiGianKetThuc = rs.getDate(7);
+                String moTa = rs.getNString(8);
+                String trangthai = rs.getNString(9);
+                Date ngaytao = rs.getDate(10);
+                String nguoitao = rs.getNString(11);
+                Date ngaysua = rs.getDate(12);
+                String nguoisua = rs.getNString(13);
+                String nguoixoa = rs.getNString(14);
+                lst.add(new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, mucGiamGia, thoiGianBatDau, thoiGianKetThuc, moTa, trangthai, ngaytao, nguoitao, ngaysua, nguoisua, nguoixoa));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lst;
+    }
+            public boolean Add(KhuyenMai km){
+                try {
+            Connection con = DBConnect.getConnection();
+            String sql = "INSERT INTO KhuyenMai(MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by)VALUES(?,?,?,?,?,?,?,?,?,GETDATE,?,GETDATE,?,?)";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, km.getMaKM());
+            stm.setString(2, km.getTenKM());
+            stm.setInt(3, km.getSoLuong());
+            stm.setString(4, km.getHinhThuc());
+            stm.setInt(5, km.getMucGiamGia());
+            stm.setString(6, dateFormat.format(km.getThoiGianBatDau()));
+            stm.setString(7, dateFormat.format(km.getThoiGianKetThuc()));
+            stm.setString(8, km.getMoTa());
+            stm.setString(9, km.getTrangThai());
+            stm.setString(10, dateFormat.format(km.getCreateAt()));
+            stm.setString(11, km.getCreateBy());
+            stm.setString(12, dateFormat.format(km.getUpdateAt()));
+            stm.setString(13,km.getUpdateBy());
+            stm.setString(14, km.getDeletedBy());
+            stm.executeUpdate();
+            return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
 }
