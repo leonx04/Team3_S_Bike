@@ -6,6 +6,7 @@ package com.raven.view;
 
 import com.raven.repository.KhuyenMai_repository;
 import com.raven.swing.KhuyenMai;
+import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;
 //import java.sql.Date;
@@ -14,18 +15,24 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class From_KhuyenMai extends javax.swing.JPanel {
 
     public From_KhuyenMai() {
         initComponents();
         tbModel = (DefaultTableModel) tbKhuyenMaiTatCa.getModel();
         loadDataTATCA();
-         tbModelhetHan = (DefaultTableModel) tbKhuyenMaiHetHan.getModel();
+        tbModelhetHan = (DefaultTableModel) tbKhuyenMaiHetHan.getModel();
         loadDataHetHan();
-         tbModelConhan = (DefaultTableModel) tbKhuyenMaiConHan.getModel();
+        tbModelConhan = (DefaultTableModel) tbKhuyenMaiConHan.getModel();
         loadDataConHan();
-        
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                searchByMaNV();
+            }
+             
+        });
+  
     }
     List<KhuyenMai> listKhuyenMaiTatCa = new ArrayList<>();
     List<KhuyenMai> listKhuyenMaiConHan = new ArrayList<>();
@@ -34,12 +41,72 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     KhuyenMai_repository repo = new KhuyenMai_repository();
     DefaultTableModel tbModelhetHan = new DefaultTableModel();
     DefaultTableModel tbModelConhan = new DefaultTableModel();
+
+    private void searchByMaNV() {
+        String searchtenNV = txtTimKiem.getText().trim();
+        DefaultTableModel searchModel = new DefaultTableModel();
+        DefaultTableModel searchModel1 = new DefaultTableModel();
+        DefaultTableModel searchModel2 = new DefaultTableModel();
+        searchModel = (DefaultTableModel) tbKhuyenMaiTatCa.getModel();
+        searchModel1 = (DefaultTableModel) tbKhuyenMaiHetHan.getModel();
+        searchModel2 = (DefaultTableModel) tbKhuyenMaiConHan.getModel();
+        searchModel.setRowCount(0);
+        searchModel1.setRowCount(0);
+        searchModel2.setRowCount(0);
+
+        for (KhuyenMai km : listKhuyenMaiTatCa) {
+            if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
+                searchModel.addRow(new Object[]{
+                    km.getMaKM(),
+                    km.getTenKM(),
+                    km.getSoLuong(),
+                    km.getHinhThuc(),
+                    km.getMucGiamGia(),
+                    km.getThoiGianBatDau(),
+                    km.getThoiGianKetThuc(),
+                    km.getTrangThai()
+                });
+            }
+        }
+        for (KhuyenMai km : listKhuyenMaiHetHan) {
+            if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
+                searchModel1.addRow(new Object[]{
+                    km.getMaKM(),
+                    km.getTenKM(),
+                    km.getSoLuong(),
+                    km.getHinhThuc(),
+                    km.getMucGiamGia(),
+                    km.getThoiGianBatDau(),
+                    km.getThoiGianKetThuc(),
+                    km.getTrangThai()
+                });
+            }
+        }
+        for (KhuyenMai km : listKhuyenMaiConHan) {
+            if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
+                searchModel2.addRow(new Object[]{
+                    km.getMaKM(),
+                    km.getTenKM(),
+                    km.getSoLuong(),
+                    km.getHinhThuc(),
+                    km.getMucGiamGia(),
+                    km.getThoiGianBatDau(),
+                    km.getThoiGianKetThuc(),
+                    km.getTrangThai()
+                });
+            }
+        }
+        tbKhuyenMaiTatCa.setModel(searchModel);
+        tbKhuyenMaiHetHan.setModel(searchModel1);
+        tbKhuyenMaiConHan.setModel(searchModel2);
+    }
+
     void loadDataTATCA() {
         tbModel.setRowCount(0);
         listKhuyenMaiTatCa = repo.getAllKM();
         for (KhuyenMai km : listKhuyenMaiTatCa) {
             tbModel.addRow(new Object[]{
-//                km.getID(),
+                //                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -48,16 +115,17 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 km.getThoiGianBatDau(),
                 km.getThoiGianKetThuc(),
                 km.getTrangThai()
-                    
+
             });
         }
     }
-        void loadDataConHan() {
+
+    void loadDataConHan() {
         tbModelConhan.setRowCount(0);
         listKhuyenMaiConHan = repo.getAllKMconHan();
         for (KhuyenMai km : listKhuyenMaiConHan) {
             tbModelConhan.addRow(new Object[]{
-//                km.getID(),
+                //                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -66,16 +134,17 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 km.getThoiGianBatDau(),
                 km.getThoiGianKetThuc(),
                 km.getTrangThai()
-                    
+
             });
         }
     }
+
     void loadDataHetHan() {
         tbModelhetHan.setRowCount(0);
         listKhuyenMaiHetHan = repo.getAllKMHetHan();
         for (KhuyenMai km : listKhuyenMaiHetHan) {
             tbModelhetHan.addRow(new Object[]{
-//                km.getID(),
+                //                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -84,18 +153,21 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 km.getThoiGianBatDau(),
                 km.getThoiGianKetThuc(),
                 km.getTrangThai()
-                    
+
             });
         }
     }
+
     KhuyenMai getFroṃ() {
         String MaKM = txtMa.getText();
         String TenKM = txtTenKM.getText();
         int SoLuong = Integer.parseInt(txtSoLuong.getText());
+        int MucGiamGia = Integer.parseInt(txtSoLuong.getText());
         String hinhThuc;
-        if (rdo) {
-            
+        if (rdoTheoPT.isSelected()) {
+            hinhThuc = "Theo%";
         } else {
+            hinhThuc = "Tiền";
         }
         String TrangThai;
         if (rdoConHan.isSelected()) {
@@ -103,14 +175,15 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         } else {
             TrangThai = "Hết Hạn";
         }
-        Date NgayBatDau = dateNgayBatDau.getDate();
-        Date NgayTao = dataNgayTao.getDate();
+        String Mota = txtMoTa.getText();
+        Date NgayBatDau = DateThoiGianBatDau.getDate();
+        Date NgayThoiGianKetThuc = DateThoiGianKetThuc.getDate();
         String NguoiTao = txtNguoiTao.getText();
-        Date Ngayketthuc = dataNgayKetThuc.getDate();
-        String NguoiSua = txtNguoisua.getText();
-        Date NgaySua = dataNgaySua.getDate();
+        Date NgayTao = DateNgayTao.getDate();
+        String NguoiSua = txtNguoiSua.getText();
+        Date NgaySua = DateNgaySua.getDate();
         String NguoiXoa = txtNguoiXoa.getText();
-       return new KhuyenMai( MaKM, GiaTriPhanTram, GiaTriTienMat, TrangThai, NguoiTao, NguoiSua, NguoiXoa, NgayBatDau, Ngayketthuc, NgayTao, NgaySua);
+        return new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, MucGiamGia, NgayBatDau, NgayThoiGianKetThuc, Mota, TrangThai, NgayTao, NguoiTao, NgaySua, NguoiSua, NguoiXoa);
     }
 
     @SuppressWarnings("unchecked")
@@ -152,11 +225,13 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtNguoiXoa = new javax.swing.JTextField();
         DateNgayTao = new com.toedter.calendar.JDateChooser();
         DateNgaySua = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         rdoHetHan = new javax.swing.JRadioButton();
         rdoConHan = new javax.swing.JRadioButton();
+        jPanel4 = new javax.swing.JPanel();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -190,12 +265,12 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Số lượng ");
-        panelBorder4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 141, 83, -1));
-        panelBorder4.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 141, 170, -1));
+        panelBorder4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 83, -1));
+        panelBorder4.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 170, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Hình thức");
-        panelBorder4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 83, -1));
+        panelBorder4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 83, -1));
 
         buttonGroup1.add(rdoTheoPT);
         rdoTheoPT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -205,7 +280,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoTheoPTActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoTheoPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
+        panelBorder4.add(rdoTheoPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
         buttonGroup1.add(rdoSoTien);
         rdoSoTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -215,7 +290,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoSoTienActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+        panelBorder4.add(rdoSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         panelBorder4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 118, -1));
@@ -240,12 +315,14 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Trạng thái");
-        panelBorder4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 80, -1));
+        panelBorder4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Ngày tạo");
         panelBorder4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 80, -1));
         panelBorder4.add(DateThoiGianKetThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 170, -1));
+
+        DateThoiGianBatDau.setToolTipText("");
         panelBorder4.add(DateThoiGianBatDau, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 170, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -269,19 +346,32 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         panelBorder4.add(DateNgayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 160, -1));
         panelBorder4.add(DateNgaySua, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 60, -1, -1));
 
-        jButton1.setText("Thêm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/add.png"))); // NOI18N
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        panelBorder4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+        panelBorder4.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 190, 80, 40));
 
-        jButton2.setText("Sửa");
-        panelBorder4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/update.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+        panelBorder4.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, 80, 40));
 
-        jButton3.setText("Xóa");
-        panelBorder4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, -1, -1));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/delete.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+        panelBorder4.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 190, 80, 40));
 
         buttonGroup2.add(rdoHetHan);
         rdoHetHan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -291,7 +381,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoHetHanActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoHetHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
+        panelBorder4.add(rdoHetHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
 
         buttonGroup2.add(rdoConHan);
         rdoConHan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -301,7 +391,13 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoConHanActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoConHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
+        panelBorder4.add(rdoConHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tìm kiếm"));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 18, 1240, -1));
+
+        panelBorder4.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 1270, 50));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Khuyến mãi");
@@ -480,9 +576,9 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
     private void tbKhuyenMaiTatCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhuyenMaiTatCaMouseClicked
         int row = tbKhuyenMaiTatCa.getSelectedRow();
-        if (row <0) {
+        if (row < 0) {
             return;
-        } 
+        }
         KhuyenMai km = listKhuyenMaiTatCa.get(row);
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
@@ -490,7 +586,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtSoLuong.setText(String.valueOf(km.getSoLuong()));
         if (km.getHinhThuc().equals("Theo%")) {
             rdoTheoPT.setSelected(true);
-        } else if(km.getHinhThuc().equals("Tiền")){
+        } else if (km.getHinhThuc().equals("Tiền")) {
             rdoSoTien.setSelected(true);
         }
         DateThoiGianBatDau.setDate(km.getThoiGianBatDau());
@@ -498,7 +594,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtMoTa.setText(km.getMoTa());
         if (km.getTrangThai().equals("Còn Hạn")) {
             rdoConHan.setSelected(true);
-        } else if(km.getTrangThai().equals("Hết Hạn")) {
+        } else if (km.getTrangThai().equals("Hết Hạn")) {
             rdoHetHan.setSelected(true);
         }
         DateNgayTao.setDate(km.getCreateAt());
@@ -506,15 +602,15 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         DateNgaySua.setDate(km.getUpdateAt());
         txtNguoiSua.setText(km.getUpdateBy());
         txtNguoiXoa.setText(km.getDeletedBy());
-        
-        
+
+
     }//GEN-LAST:event_tbKhuyenMaiTatCaMouseClicked
 
     private void tbKhuyenMaiHetHanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhuyenMaiHetHanMouseClicked
-              int row = tbKhuyenMaiHetHan.getSelectedRow();
-        if (row <0) {
+        int row = tbKhuyenMaiHetHan.getSelectedRow();
+        if (row < 0) {
             return;
-        } 
+        }
         KhuyenMai km = listKhuyenMaiHetHan.get(row);
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
@@ -522,7 +618,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtSoLuong.setText(String.valueOf(km.getSoLuong()));
         if (km.getHinhThuc().equals("Theo%")) {
             rdoTheoPT.setSelected(true);
-        } else if(km.getHinhThuc().equals("Tiền")){
+        } else if (km.getHinhThuc().equals("Tiền")) {
             rdoSoTien.setSelected(true);
         }
         DateThoiGianBatDau.setDate(km.getThoiGianBatDau());
@@ -530,7 +626,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtMoTa.setText(km.getMoTa());
         if (km.getTrangThai().equals("Còn Hạn")) {
             rdoConHan.setSelected(true);
-        } else if(km.getTrangThai().equals("Hết Hạn")) {
+        } else if (km.getTrangThai().equals("Hết Hạn")) {
             rdoHetHan.setSelected(true);
         }
         DateNgayTao.setDate(km.getCreateAt());
@@ -538,14 +634,14 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         DateNgaySua.setDate(km.getUpdateAt());
         txtNguoiSua.setText(km.getUpdateBy());
         txtNguoiXoa.setText(km.getDeletedBy());
-        
+
     }//GEN-LAST:event_tbKhuyenMaiHetHanMouseClicked
 
     private void tbKhuyenMaiConHanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhuyenMaiConHanMouseClicked
-                int row = tbKhuyenMaiConHan.getSelectedRow();
-        if (row <0) {
+        int row = tbKhuyenMaiConHan.getSelectedRow();
+        if (row < 0) {
             return;
-        } 
+        }
         KhuyenMai km = listKhuyenMaiConHan.get(row);
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
@@ -553,7 +649,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtSoLuong.setText(String.valueOf(km.getSoLuong()));
         if (km.getHinhThuc().equals("Theo%")) {
             rdoTheoPT.setSelected(true);
-        } else if(km.getHinhThuc().equals("Tiền")){
+        } else if (km.getHinhThuc().equals("Tiền")) {
             rdoSoTien.setSelected(true);
         }
         DateThoiGianBatDau.setDate(km.getThoiGianBatDau());
@@ -561,7 +657,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         txtMoTa.setText(km.getMoTa());
         if (km.getTrangThai().equals("Còn Hạn")) {
             rdoConHan.setSelected(true);
-        } else if(km.getTrangThai().equals("Hết Hạn")) {
+        } else if (km.getTrangThai().equals("Hết Hạn")) {
             rdoHetHan.setSelected(true);
         }
         DateNgayTao.setDate(km.getCreateAt());
@@ -569,12 +665,71 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         DateNgaySua.setDate(km.getUpdateAt());
         txtNguoiSua.setText(km.getUpdateBy());
         txtNguoiXoa.setText(km.getDeletedBy());
-        
-    }//GEN-LAST:event_tbKhuyenMaiConHanMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_tbKhuyenMaiConHanMouseClicked
+    public void Clear() {
+        txtMa.setText("");
+        txtMoTa.setText("");
+        txtMucGiamGia.setText("");
+        txtNguoiSua.setText("");
+        txtNguoiTao.setText("");
+        txtNguoiXoa.setText("");
+        txtSoLuong.setText("");
+        txtTenKM.setText("");
+        buttonGroup1.clearSelection();
+        buttonGroup2.clearSelection();
+
+    }
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        KhuyenMai km = getFroṃ();
+        if (repo.Add(km)) {
+            loadDataTATCA();
+            Clear();
+            JOptionPane.showMessageDialog(this, "Đã lưu");
+        } else {
+            JOptionPane.showMessageDialog(this, "Lưu không thành công");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int row = tbKhuyenMaiTatCa.getSelectedRow();
+        if(row < 0) return;
+
+        KhuyenMai km = getFroṃ();
+        String MaKM = listKhuyenMaiTatCa.get(row).getMaKM();
+        km.setMaKM(MaKM);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(repo.update(km)){
+            loadDataTATCA();
+            Clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+                int row = tbKhuyenMaiTatCa.getSelectedRow();
+        if(row < 0){
+            return;
+        }
+        
+        int cauhoi = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ? ", "Hỏi",
+                JOptionPane.YES_NO_OPTION);
+        if (cauhoi == JOptionPane.NO_OPTION) {
+            return;
+        }
+        
+        String MaKM = listKhuyenMaiTatCa.get(row).getMaKM();
+        if(repo.deleteById(MaKM)){
+            loadDataTATCA();
+            Clear();
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "Xóa không thành công");
+        }
+       
+    }//GEN-LAST:event_btnXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -582,12 +737,12 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser DateNgayTao;
     private com.toedter.calendar.JDateChooser DateThoiGianBatDau;
     private com.toedter.calendar.JDateChooser DateThoiGianKetThuc;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -608,6 +763,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -629,5 +785,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTextField txtNguoiXoa;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenKM;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

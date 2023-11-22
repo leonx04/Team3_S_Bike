@@ -50,7 +50,7 @@ public class KhuyenMai_repository {
         return lst;
     }
 
-        public List<KhuyenMai> getAllKMHetHan() {
+    public List<KhuyenMai> getAllKMHetHan() {
         List<KhuyenMai> lst = new ArrayList<>();
         try {
             Connection con = DBConnect.getConnection();
@@ -71,7 +71,7 @@ public class KhuyenMai_repository {
                 Date ngaysua = rs.getDate(12);
                 String nguoisua = rs.getNString(13);
                 String nguoixoa = rs.getNString(14);
-               lst.add(new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, mucGiamGia, thoiGianBatDau, thoiGianKetThuc, moTa, trangthai, ngaytao, nguoitao, ngaysua, nguoisua, nguoixoa));
+                lst.add(new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, mucGiamGia, thoiGianBatDau, thoiGianKetThuc, moTa, trangthai, ngaytao, nguoitao, ngaysua, nguoisua, nguoixoa));
             }
             rs.close();
         } catch (Exception e) {
@@ -79,7 +79,8 @@ public class KhuyenMai_repository {
         }
         return lst;
     }
-            public List<KhuyenMai> getAllKMconHan() {
+
+    public List<KhuyenMai> getAllKMconHan() {
         List<KhuyenMai> lst = new ArrayList<>();
         try {
             Connection con = DBConnect.getConnection();
@@ -108,10 +109,11 @@ public class KhuyenMai_repository {
         }
         return lst;
     }
-            public boolean Add(KhuyenMai km){
-                try {
+
+    public boolean Add(KhuyenMai km) {
+        try {
             Connection con = DBConnect.getConnection();
-            String sql = "INSERT INTO KhuyenMai(MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by)VALUES(?,?,?,?,?,?,?,?,?,GETDATE,?,GETDATE,?,?)";
+            String sql = "INSERT INTO KhuyenMai(MaKM,TenKM,SoLuong,HinhThuc,MucGiamGia,ThoiGianBatDau,ThoiGianKetThuc,MoTa,TrangThai,Create_at,Create_by,Update_at,Update_by,Deleted_by)VALUES(?,?,?,?,?,?,?,?,?,GETDATE(),?,GETDATE(),?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, km.getMaKM());
             stm.setString(2, km.getTenKM());
@@ -122,16 +124,60 @@ public class KhuyenMai_repository {
             stm.setString(7, dateFormat.format(km.getThoiGianKetThuc()));
             stm.setString(8, km.getMoTa());
             stm.setString(9, km.getTrangThai());
-            stm.setString(10, dateFormat.format(km.getCreateAt()));
-            stm.setString(11, km.getCreateBy());
-            stm.setString(12, dateFormat.format(km.getUpdateAt()));
-            stm.setString(13,km.getUpdateBy());
-            stm.setString(14, km.getDeletedBy());
+//            stm.setString(10, dateFormat.format(km.getCreateAt()));
+            stm.setString(10, km.getCreateBy());
+//            stm.setString(12, dateFormat.format(km.getUpdateAt()));
+            stm.setString(11, km.getUpdateBy());
+            stm.setString(12, km.getDeletedBy());
             stm.executeUpdate();
             return true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean update(KhuyenMai km) {
+        try {
+            Connection conn = DBConnect.getConnection();
+
+            String sql = "UPDATE KhuyenMai SET TenKM=?,SoLuong=?,HinhThuc=?,MucGiamGia=?,ThoiGianBatDau=?,ThoiGianKetThuc=?,MoTa=?,TrangThai=?,Create_at=?,Create_by=?,Update_at=?,Update_by=?,Deleted_by=? WHERE MaKM=?";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, km.getMaKM());
+            stm.setString(2, km.getTenKM());
+            stm.setInt(3, km.getSoLuong());
+            stm.setString(4, km.getHinhThuc());
+            stm.setInt(5, km.getMucGiamGia());
+            stm.setString(6, dateFormat.format(km.getThoiGianBatDau()));
+            stm.setString(7, dateFormat.format(km.getThoiGianKetThuc()));
+            stm.setString(8, km.getMoTa());
+            stm.setString(9, km.getTrangThai());
+//            stm.setString(10, dateFormat.format(km.getCreateAt()));
+            stm.setString(10, km.getCreateBy());
+//            stm.setString(12, dateFormat.format(km.getUpdateAt()));
+            stm.setString(11, km.getUpdateBy());
+            stm.setString(12, km.getDeletedBy());
+            stm.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteById(String MaKM) {
+        try {
+            Connection con = DBConnect.getConnection();
+            String sql = "DELETE FROM KhuyenMai WHERE MaKM=?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, MaKM);
+            stm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
