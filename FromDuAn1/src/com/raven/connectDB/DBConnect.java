@@ -8,9 +8,9 @@ public class DBConnect {
 
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "XeDap";
+    public static final String DBNAME = "BanXeDap";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "123";
+    public static final String PASSWORD = "1234";
 
     public static Connection getConnection() {
         String connectionUrl = "jdbc:sqlserver://" + HOSTNAME + ":" + PORT + ";"

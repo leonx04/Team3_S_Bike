@@ -113,7 +113,11 @@
                               <Component id="txtMaSP" max="32767" attributes="0"/>
                               <Component id="txtMaHex" max="32767" attributes="0"/>
                               <Component id="txtSoLuong" max="32767" attributes="0"/>
-                              <Component id="cboTrangThai" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="rdoConHang" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="rdoHetHang" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace pref="24" max="32767" attributes="0"/>
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
@@ -149,11 +153,12 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cboTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdoConHang" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdoHetHang" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
@@ -288,21 +293,15 @@
                     <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cboTrangThai">
+                <Component class="javax.swing.JRadioButton" name="rdoConHang">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="0"/>
-                    </Property>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="2">
-                        <StringItem index="0" value="C&#xf2;n h&#xe0;ng"/>
-                        <StringItem index="1" value="H&#x1ebf;t h&#xe0;ng"/>
-                      </StringArray>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="C&#xf2;n h&#xe0;ng"/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdoHetHang">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="H&#x1ebf;t h&#xe0;ng"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -321,7 +320,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="589" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="587" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -431,7 +430,7 @@
                               <Component id="txtTimKiem" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="btnTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="156" max="32767" attributes="0"/>
+                          <EmptySpace pref="158" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

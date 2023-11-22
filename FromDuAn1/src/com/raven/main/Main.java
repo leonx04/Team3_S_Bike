@@ -5,6 +5,7 @@
  */
 package com.raven.main;
 
+import com.raven.NhanVien.NhanVien;
 import com.raven.event.EventMenuSelected;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
@@ -39,9 +40,9 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 13) {
 
                 } else if (index == 15) {
-
+                    
                 } else if (index == 17) {
-
+                    setFrom(new NhanVien());
                 } else if (index == 19) {
                     setFrom(new From_KhuyenMai());
                 }
