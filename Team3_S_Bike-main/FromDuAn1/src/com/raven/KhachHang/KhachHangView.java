@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -35,35 +37,35 @@ public class KhachHangView extends javax.swing.JPanel {
         txt_timKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                timKiem(); // Gọi hàm tìm kiếm khi có thay đổi trong ô tìm kiếm
+//                timKiem(); // Gọi hàm tìm kiếm khi có thay đổi trong ô tìm kiếm
             }
         });
     }
-private void timKiem(){
-           String searchtenNV = txt_timKiem.getText().trim();
-        DefaultTableModel searchModel = new DefaultTableModel();
-        searchModel = (DefaultTableModel) tbl_KhachHang.getModel();
-        searchModel.setRowCount(0);
-
-        for (Model_KhachHang kh : listKH) {
-            if (kh.getTenKH().toLowerCase().contains(searchtenNV.toLowerCase())) {
-                searchModel.addRow(new Object[]{
-                    kh.getId(),
-                    kh.getMakh(),
-                    kh.getTenKH(),
-                    kh.getSdt(),
-                    kh.getEmail(),
-                    kh.getDiachi(),
-                    kh.getNgaysinh(),
-                    kh.getTrangthai()
-                }
-                );
-
-            }
-        }
-        tbl_KhachHang.setModel(searchModel);
-
-}
+//private void timKiem(){
+//           String searchtenNV = txt_timKiem.getText().trim();
+//        DefaultTableModel searchModel = new DefaultTableModel();
+//        searchModel = (DefaultTableModel) tbl_KhachHang.getModel();
+//        searchModel.setRowCount(0);
+//
+//        for (Model_KhachHang kh : listKH) {
+//            if (kh.getTenKH().toLowerCase().contains(searchtenNV.toLowerCase())) {
+//                searchModel.addRow(new Object[]{
+//                    kh.getId(),
+//                    kh.getMakh(),
+//                    kh.getTenKH(),
+//                    kh.getSdt(),
+//                    kh.getEmail(),
+//                    kh.getDiachi(),
+//                    kh.getNgaysinh(),
+//                    kh.getTrangthai()
+//                }
+//                );
+//
+//            }
+//        }
+//        tbl_KhachHang.setModel(searchModel);
+//
+//}
     void fillTable() {
         mol = (DefaultTableModel) tbl_KhachHang.getModel();
         mol.setRowCount(0);
@@ -132,7 +134,7 @@ private void timKiem(){
             JOptionPane.showMessageDialog(this, "Số điện thoại rỗng");
             return false;
         } else {
-            if (!txt_soDienThoai.getText().trim().matches("^0\\\\d{9,10}$")) {
+            if (!txt_soDienThoai.getText().trim().matches("^(\\\\+?84|0)(3[2-9]|5[2689]|7[06789]|8[1-9]|9[0-9])([0-9]{7})$")) {
                 JOptionPane.showMessageDialog(this, "Số điện thoại sai định dạng");
                 return false;
             }
@@ -155,6 +157,12 @@ private void timKiem(){
         txt_Id.setText("");
     }
 
+    private void filter(String query){
+        TableRowSorter<DefaultTableModel> tr = new
+        TableRowSorter<DefaultTableModel>(model);
+        tbl_KhachHang.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(query));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,11 +177,9 @@ private void timKiem(){
         tbl_KhachHang = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        btn_delete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txt_Id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btn_reset = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txt_MaKhachHang = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -184,17 +190,20 @@ private void timKiem(){
         txt_email = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txt_diaChi = new javax.swing.JTextField();
-        btn_Them = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txt_ngaySinh = new javax.swing.JTextField();
-        btn_Update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txt_timKiem = new javax.swing.JTextField();
         btn_timKiem = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btn_Them = new javax.swing.JButton();
+        btn_Update = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        btn_reset = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         tbl_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,17 +233,17 @@ private void timKiem(){
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
@@ -242,22 +251,11 @@ private void timKiem(){
 
         jLabel9.setText("Trạng Thái");
 
-        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/delete.png"))); // NOI18N
-        btn_delete.setText("Xóa");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("ID");
 
         txt_Id.setEditable(false);
 
         jLabel3.setText("Mã Khách Hàng");
-
-        btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/circular.png"))); // NOI18N
-        btn_reset.setText("Reset");
 
         jLabel4.setText("Tên Khách Hàng");
 
@@ -267,6 +265,32 @@ private void timKiem(){
 
         jLabel7.setText("Địa Chỉ");
 
+        jLabel8.setText("Ngày Sinh");
+
+        jLabel1.setText("Tìm Kiếm khách hàng");
+
+        txt_timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_timKiemActionPerformed(evt);
+            }
+        });
+        txt_timKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_timKiemKeyReleased(evt);
+            }
+        });
+
+        btn_timKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        btn_timKiem.setText("Tìm kiếm");
+        btn_timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timKiemActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         btn_Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/plus.png"))); // NOI18N
         btn_Them.setText("Thêm");
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
@@ -274,8 +298,6 @@ private void timKiem(){
                 btn_ThemActionPerformed(evt);
             }
         });
-
-        jLabel8.setText("Ngày Sinh");
 
         btn_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/diskette.png"))); // NOI18N
         btn_Update.setText("Sửa");
@@ -285,14 +307,52 @@ private void timKiem(){
             }
         });
 
-        jLabel1.setText("Tìm Kiếm khách hàng");
-
-        btn_timKiem.setText("Tìm kiếm");
-        btn_timKiem.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/delete.png"))); // NOI18N
+        btn_delete.setText("Xóa");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_timKiemActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
+
+        btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/circular.png"))); // NOI18N
+        btn_reset.setText("Reset");
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_reset)
+                            .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)))
+                .addGap(40, 40, 40))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btn_Them)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Update)
+                .addGap(18, 18, 18)
+                .addComponent(btn_delete)
+                .addGap(18, 18, 18)
+                .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -307,7 +367,7 @@ private void timKiem(){
                         .addGap(31, 31, 31)
                         .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(btn_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -335,32 +395,22 @@ private void timKiem(){
                             .addComponent(txt_email)
                             .addComponent(txt_diaChi)
                             .addComponent(txt_ngaySinh)
-                            .addComponent(txt_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(96, 96, 96)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Update)
-                    .addComponent(btn_delete)
-                    .addComponent(btn_Them)
-                    .addComponent(btn_reset))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txt_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timKiem))
+                .addGap(18, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_timKiem)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(btn_Them)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,8 +426,7 @@ private void timKiem(){
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txt_soDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -392,15 +441,12 @@ private void timKiem(){
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(txt_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_Update)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_delete)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_reset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txt_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(64, 64, 64))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -408,23 +454,21 @@ private void timKiem(){
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 222, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -500,13 +544,29 @@ private void timKiem(){
 
     private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         // TODO add your handling code here:    
- 
 
     }//GEN-LAST:event_btn_timKiemActionPerformed
 
     private void tbl_KhachHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_KhachHangKeyReleased
         // TODO add your handling code here:
+
     }//GEN-LAST:event_tbl_KhachHangKeyReleased
+
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
+        // TODO add your handling code here:
+        cleanForm();
+    }//GEN-LAST:event_btn_resetActionPerformed
+
+    private void txt_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_timKiemActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_timKiemActionPerformed
+
+    private void txt_timKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timKiemKeyReleased
+        // TODO add your handling code here:
+        String query = txt_timKiem.getText();
+        filter(query);
+    }//GEN-LAST:event_txt_timKiemKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -524,6 +584,7 @@ private void timKiem(){
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
