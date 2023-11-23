@@ -130,7 +130,7 @@ public class QuanLyKhachHang {
         return listkh;
 }
      public Model_KhachHang checkTrungMa(String ma) { 
-        sql = "select id,makh,tenkh,sdt,email,diachi,ngaysinh,trangthai from KhachHang where maNV = ?";
+        sql = "select id,makh,tenkh,sdt,email,diachi,ngaysinh,trangthai from KhachHang where maKH = ?";
         Model_KhachHang kh = null;
         try { 
             con = DBConnect.getConnection();
@@ -153,5 +153,23 @@ public class QuanLyKhachHang {
             e.printStackTrace();
             return null;
         }
+    }
+      public boolean isMaKhachHangDuplicated(String maKhachHang) {
+        String query = "SELECT COUNT(*) FROM KhachHang WHERE MaKH = ?";
+        
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, maKhachHang);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
