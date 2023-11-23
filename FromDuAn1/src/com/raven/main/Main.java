@@ -6,6 +6,7 @@
 package com.raven.main;
 
 import com.raven.event.EventMenuSelected;
+import com.raven.view.Bill_Jpanel;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
@@ -33,7 +34,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
 
                 } else if (index == 9) {
-
+                    setFrom(new Bill_Jpanel());
                 } else if (index == 11) {
                     setFrom(new JPanel_SanPham());
                 } else if (index == 13) {
@@ -75,6 +76,7 @@ public class Main extends javax.swing.JFrame {
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(249, 249, 249));
+        panelBorder1.setMinimumSize(new java.awt.Dimension(1500, 850));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelBorder1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
