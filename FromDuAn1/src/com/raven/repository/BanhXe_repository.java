@@ -25,15 +25,15 @@ public class BanhXe_repository {
     String sql = null;
 
     public List<Model_BanhXe> getAllBX() {
-        sql = "SELECT MaBanhXe, TenBanhXe FROM BanhXe";
+        sql = "SELECT IDBanhXe, MaBX, TenBX FROM BanhXe";
         List<Model_BanhXe> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_BanhXe BX = new Model_BanhXe(rs.getString(1),
-                        rs.getString(2));
+                Model_BanhXe BX = new Model_BanhXe(rs.getInt(1), rs.getString(2),
+                        rs.getString(3));
                 list.add(BX);
             }
             return list;
@@ -44,7 +44,7 @@ public class BanhXe_repository {
     }
 
     public Model_BanhXe getfillTenBanhXe(String ten) {
-        sql = "SELECT  * FROM BanhXe WHERE TenBanhXe = ?";
+        sql = "SELECT  * FROM BanhXe WHERE TenBX = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class BanhXe_repository {
     }
 
     public int getID(String ten) {
-        sql = "SELECT ID FROM BanhXe WHERE TenBanhXe = ?";
+        sql = "SELECT IDBanhXe FROM BanhXe WHERE TenBX = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -76,4 +76,21 @@ public class BanhXe_repository {
         }
         return 0;
     }
+
+    public int InsertBX(Model_BanhXe ma) {
+        sql = "INSERT INTO BanhXe(MaBX, TenBX) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaBX());
+            ps.setString(2, ma.getTenBanhXe());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
+    
+    
 }

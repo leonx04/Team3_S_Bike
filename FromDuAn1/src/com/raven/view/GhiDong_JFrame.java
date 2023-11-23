@@ -6,8 +6,14 @@ package com.raven.view;
 
 import com.raven.model.Model_GhiDong;
 import com.raven.repository.GhiDong_repository;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -32,6 +38,7 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
     void Fill(List<Model_GhiDong> list) {
         model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
+        sortSTTColumn();
         for (Model_GhiDong s : list) {
             model.addRow(s.toData());
         }
@@ -44,6 +51,29 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         txtMa.setText(ma);
         txtTen.setText(ten);
 
+    }
+
+    Model_GhiDong read() {
+        Model_GhiDong gd = new Model_GhiDong();
+        gd.setMaGD(txtMa.getText());
+        gd.setLoaiGD(txtTen.getText());
+        return gd;
+    }
+
+    void clear() {
+        txtMa.setText(null);
+        txtTen.setText(null);
+    }
+
+    public void sortSTTColumn() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tbl.getModel());
+        tbl.setRowSorter(sorter);
+
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
     }
 
     /**
@@ -73,13 +103,13 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Mã", "Tên "
+                "STT", "Mã", "Tên"
             }
         ));
         tbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,6 +124,11 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         jButton3.setText("Cập nhật");
 
         jButton2.setText("Thêm");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Tìm kiếm");
@@ -173,6 +208,18 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         index = tbl.getSelectedRow();
         this.show(index);
     }//GEN-LAST:event_tblMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Model_GhiDong gd = read();
+        GhiDong_repository repoGX = new GhiDong_repository();
+        if (repoGX.InsertGD(gd) > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            Fill(repoGX.getAllGD());
+            this.clear();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

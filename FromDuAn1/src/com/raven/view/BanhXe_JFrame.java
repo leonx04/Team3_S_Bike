@@ -4,11 +4,26 @@
  */
 package com.raven.view;
 
+import com.raven.model.Model_BanhXe;
+import com.raven.repository.BanhXe_repository;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author dungn
  */
 public class BanhXe_JFrame extends javax.swing.JFrame {
+
+    private DefaultTableModel model = new DefaultTableModel();
+    private BanhXe_repository res = new BanhXe_repository();
+    private int index = -1;
 
     /**
      * Creates new form BanhXe_JFrame
@@ -17,6 +32,48 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setTitle("Bánh Xe");
+        this.Fill(res.getAllBX());
+        sortSTTColumn();
+    }
+
+    void Fill(List<Model_BanhXe> list) {
+        model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        sortSTTColumn();
+        for (Model_BanhXe s : list) {
+            model.addRow(s.toData());
+        }
+    }
+
+    void show(int index) {
+        String ma = tbl.getValueAt(index, 1).toString().trim();
+        String ten = tbl.getValueAt(index, 2).toString().trim();
+        txtMa.setText(ma);
+        txtTen.setText(ten);
+
+    }
+
+    Model_BanhXe read() {
+        Model_BanhXe bx = new Model_BanhXe();
+        bx.setMaBX(txtMa.getText());
+        bx.setTenBanhXe(txtTen.getText());
+        return bx;
+    }
+
+    void clear() {
+        txtMa.setText(null);
+        txtTen.setText(null);
+    }
+
+    public void sortSTTColumn() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tbl.getModel());
+        tbl.setRowSorter(sorter);
+
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
     }
 
     /**
@@ -29,35 +86,40 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tbl = new javax.swing.JTable();
+        txtMa = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnADDBX = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Mã", "Tên "
+                "STT", "Mã", "Tên"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl);
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Mã ");
@@ -70,7 +132,12 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Tìm kiếm");
 
-        jButton2.setText("Thêm");
+        btnADDBX.setText("Thêm");
+        btnADDBX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnADDBXActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cập nhật");
 
@@ -95,8 +162,8 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(104, 104, 104)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(txtMa))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +174,7 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
                                 .addComponent(jButton1)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnADDBX)
                         .addGap(56, 56, 56)
                         .addComponent(jButton3)
                         .addGap(45, 45, 45)
@@ -119,11 +186,11 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +200,7 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnADDBX)
                     .addComponent(jButton3)
                     .addComponent(jButton8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -145,6 +212,25 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
+        // TODO add your handling code here:
+        index = tbl.getSelectedRow();
+        this.show(index);
+    }//GEN-LAST:event_tblMouseClicked
+
+    private void btnADDBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADDBXActionPerformed
+        Model_BanhXe bx = read();
+        BanhXe_repository repoBX = new BanhXe_repository();
+        if (repoBX.InsertBX(bx) > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            Fill(repoBX.getAllBX());
+            this.clear();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+
+    }//GEN-LAST:event_btnADDBXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,20 +268,16 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnADDBX;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }

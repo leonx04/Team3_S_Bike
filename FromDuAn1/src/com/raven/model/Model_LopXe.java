@@ -9,20 +9,31 @@ package com.raven.model;
  * @author dungn
  */
 public class Model_LopXe {
+
     public int ID;
     public String MaLX;
     public String TenLX;
 
     public Model_LopXe(String MaLX, String TenLX) {
+        this.MaLX = MaLX;
+        this.TenLX = TenLX;
+    }
+
+    public Model_LopXe(int ID, String MaLX, String TenLX) {
         this.ID = ID;
         this.MaLX = MaLX;
         this.TenLX = TenLX;
     }
 
+    public Object[] toData() {
+        return new Object[]{
+            this.ID, this.MaLX, this.TenLX
+        };
+    }
+
     public Model_LopXe() {
     }
 
-    
     public int getID() {
         return ID;
     }
@@ -52,6 +63,4 @@ public class Model_LopXe {
         return "Model_LopXe{" + "ID=" + ID + ", MaLX=" + MaLX + ", TenLX=" + TenLX + '}';
     }
 
-
-    
 }

@@ -23,7 +23,7 @@ public class SanPham_responsitory {
     String sql = null;
 
     public List<Model_SanPham> getALLSP() {
-        sql = "SELECT      ID, MaSP, TenSP, MaCode, Model, SoLuong, TrangThai FROM  SanPham";
+        sql = "SELECT      IDSanPham, MaSP, TenSP, MaHex, Model, SoLuong, TrangThai FROM  SanPham";
         List<Model_SanPham> listSP = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
@@ -50,7 +50,7 @@ public class SanPham_responsitory {
 
     public Integer insert(Model_SanPham sp) {
         Integer row = null;
-        sql = "INSERT INTO SanPham (MaSP, TenSP, MaCode, Model, SoLuong, TrangThai)\n"
+        sql = "INSERT INTO SanPham (MaSP, TenSP, MaHex, Model, SoLuong, TrangThai)\n"
                 + "VALUES (?,?,?,?,?,?)";
         con = DBConnect.getConnection();
         try {

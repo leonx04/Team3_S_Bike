@@ -9,6 +9,7 @@ package com.raven.model;
  * @author dungn
  */
 public class Model_BanhXe {
+
     public int ID;
     public String MaBX;
     public String TenBanhXe;
@@ -16,7 +17,12 @@ public class Model_BanhXe {
     public Model_BanhXe() {
     }
 
-    
+    public Object[] toData() {
+        return new Object[]{
+            this.ID, this.MaBX, this.TenBanhXe
+        };
+    }
+
     public Model_BanhXe(String MaBX, String TenBanhXe) {
         this.ID = ID;
         this.MaBX = MaBX;
@@ -28,6 +34,7 @@ public class Model_BanhXe {
         this.MaBX = MaBX;
         this.TenBanhXe = TenBanhXe;
     }
+
     public int getID() {
         return ID;
     }
@@ -57,8 +64,4 @@ public class Model_BanhXe {
         return "Model_BanhXe{" + "ID=" + ID + ", MaBX=" + MaBX + ", TenBanhXe=" + TenBanhXe + '}';
     }
 
-    
-
-
-    
 }

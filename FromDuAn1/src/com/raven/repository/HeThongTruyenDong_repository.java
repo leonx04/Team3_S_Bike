@@ -25,15 +25,15 @@ public class HeThongTruyenDong_repository {
     String sql = null;
 
     public List<Model_HeThongTruyenDong> getAllHTTD() {
-        sql = "SELECT MaHTTD, LoaiLip FROM HeThongTruyenDong";
+        sql = "SELECT IDHeThongTruyenDong, MaHTTD, TenHTTD FROM HeThongTruyenDong";
         List<Model_HeThongTruyenDong> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_HeThongTruyenDong HTTD = new Model_HeThongTruyenDong(rs.getString(1),
-                        rs.getString(2));
+                Model_HeThongTruyenDong HTTD = new Model_HeThongTruyenDong(rs.getInt(1), rs.getString(2),
+                        rs.getString(3));
                 list.add(HTTD);
             }
             return list;
@@ -44,13 +44,14 @@ public class HeThongTruyenDong_repository {
     }
 
     public Model_HeThongTruyenDong getTenLip(String ten) {
-        sql = "SELECT * FROM HeThongTruyenDong WHERE LoaiLip = ?";
+        sql = "SELECT IDHeThongTruyenDong, MaHTTD, TenHTTD FROM HeThongTruyenDong WHERE TenHTTD = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, ten);
             while (rs.next()) {
-                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong(rs.getString(1), rs.getString(2));
+                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong( rs.getInt(1),
+                        rs.getString(2),rs.getString(3));
                 return mdHTTD;
             }
         } catch (Exception e) {

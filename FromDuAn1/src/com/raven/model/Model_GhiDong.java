@@ -18,6 +18,11 @@ public class Model_GhiDong {
     public String LoaiGD;
 
     public Model_GhiDong(String MaGD, String LoaiGD) {
+        this.MaGD = MaGD;
+        this.LoaiGD = LoaiGD;
+    }
+
+    public Model_GhiDong(int ID, String MaGD, String LoaiGD) {
         this.ID = ID;
         this.MaGD = MaGD;
         this.LoaiGD = LoaiGD;
@@ -25,7 +30,7 @@ public class Model_GhiDong {
 
     public Object[] toData() {
         return new Object[]{
-            this.MaGD, this.LoaiGD
+            this.ID, this.MaGD, this.LoaiGD
         };
     }
 

@@ -25,15 +25,15 @@ public class KhungXe_repository {
     String sql = null;
 
     public List<Model_KhungXe> getAllKX() {
-        sql = "SELECT MaKhungXe, TenKhungXe FROM KhungXe";
+        sql = "SELECT IDKhungXe,MaKX,TenKX FROM KhungXe";
         List<Model_KhungXe> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_KhungXe KX = new Model_KhungXe(rs.getString(1),
-                        rs.getString(2));
+                Model_KhungXe KX = new Model_KhungXe(rs.getInt(1), rs.getString(2),
+                        rs.getString(3));
                 list.add(KX);
             }
             return list;
@@ -44,14 +44,15 @@ public class KhungXe_repository {
     }
 
     public Model_KhungXe getTenKhungXe(String ten) {
-        sql = "SELECT  * FROM KhungXe  WHERE TenKhungXe = ? ";
+        sql = "SELECT  * FROM KhungXe  WHERE TenKX = ? ";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, ten);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_KhungXe mdkx = new Model_KhungXe(rs.getString(1), rs.getString(2));
+                Model_KhungXe mdkx = new Model_KhungXe(rs.getInt(1), rs.getString(2),
+                        rs.getString(3));
                 return mdkx;
             }
         } catch (Exception e) {

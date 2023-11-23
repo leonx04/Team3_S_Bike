@@ -21,14 +21,14 @@ public class PhanhXe_repository {
     String sql = null;
 
     public List<Model_PhanhXe> getAllPX() {
-        sql = "SELECT  ID,MaPhanhXe,TenPhanhXe FROM PhanhXe";
+        sql = "SELECT  IDPhanhXe,MaPX,TenPX FROM PhanhXe";
         List<Model_PhanhXe> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_PhanhXe TH = new Model_PhanhXe(rs.getInt(1),rs.getString(2),
+                Model_PhanhXe TH = new Model_PhanhXe(rs.getInt(1), rs.getString(2),
                         rs.getString(3));
                 list.add(TH);
             }
@@ -40,7 +40,7 @@ public class PhanhXe_repository {
     }
 
     public Model_PhanhXe getFillTenPhanhXe(String ten) {
-        sql = "SELECT  * FROM PhanhXe WHERE TenPhanhXe  = ?";
+        sql = "SELECT  * FROM PhanhXe WHERE TenPX  = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class PhanhXe_repository {
     }
 
     public int getID(String tenPhanhXe) {
-        sql = "SELECT ID FROM PhanhXe WHERE TenPhanhXe = ?";
+        sql = "SELECT IDPhanhXe FROM PhanhXe WHERE TenPX = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);

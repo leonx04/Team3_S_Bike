@@ -9,21 +9,31 @@ package com.raven.model;
  * @author dungn
  */
 public class Model_KhungXe {
+
     public int ID;
     public String MaKX;
     public String TenKhungXe;
 
     public Model_KhungXe(String MaKX, String TenKhungXe) {
+        this.MaKX = MaKX;
+        this.TenKhungXe = TenKhungXe;
+    }
+
+    public Model_KhungXe(int ID, String MaKX, String TenKhungXe) {
         this.ID = ID;
         this.MaKX = MaKX;
         this.TenKhungXe = TenKhungXe;
     }
 
+    public Object[] toData() {
+        return new Object[]{
+            this.ID, this.MaKX, this.TenKhungXe
+        };
+    }
+
     public Model_KhungXe() {
     }
 
-    
-    
     public int getID() {
         return ID;
     }
@@ -53,6 +63,4 @@ public class Model_KhungXe {
         return "Model_KhungXe{" + "ID=" + ID + ", MaKX=" + MaKX + ", TenKhungXe=" + TenKhungXe + '}';
     }
 
-
-    
 }

@@ -81,8 +81,10 @@ public class Main extends javax.swing.JFrame {
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         panelBorder1.add(header2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 1320, -1));
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         mainPanel.setLayout(new java.awt.BorderLayout());
-        panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 50, 1320, 800));
+        panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 1320, 790));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +94,9 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();

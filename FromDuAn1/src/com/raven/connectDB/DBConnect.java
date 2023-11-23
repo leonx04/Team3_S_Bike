@@ -8,7 +8,7 @@ public class DBConnect {
 
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "BanXeDap2";
+    public static final String DBNAME = "DbXeDap3";
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "123456";
 

@@ -20,6 +20,16 @@ public class Model_SanPham {
         this.TrangThai = TrangThai;
     }
 
+    public Model_SanPham(String maSP, String tenSP, String maCode, String Model, int SoLuong, String TrangThai) {
+
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.maCode = maCode;
+        this.Model = Model;
+        this.SoLuong = SoLuong;
+        this.TrangThai = TrangThai;
+    }
+
     public long getID() {
         return ID;
     }
@@ -81,7 +91,6 @@ public class Model_SanPham {
         return "Model_SanPham{" + "ID=" + ID + ", maSP=" + maSP + ", tenSP=" + tenSP + ", maCode=" + maCode + ", Model=" + Model + ", SoLuong=" + SoLuong + ", TrangThai=" + TrangThai + '}';
     }
 
-    
     public long ID;
     public String maSP;
     public String tenSP;

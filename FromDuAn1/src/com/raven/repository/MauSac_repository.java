@@ -5,36 +5,33 @@
 package com.raven.repository;
 
 import com.raven.connectDB.DBConnect;
-import com.raven.model.Model_GhiDong;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.raven.model.Model_MauSac;
+import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author dungn
  */
-public class GhiDong_repository {
+public class MauSac_repository {
 
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     String sql = null;
 
-    public List<Model_GhiDong> getAllGD() {
-        sql = "SELECT IDGhiDong, MaGD, TenGD FROM GhiDong";
-        List<Model_GhiDong> list = new ArrayList<>();
+    public List<Model_MauSac> getAllMS() {
+        sql = "SELECT IDMauSac, MaMS, TenMS FROM MauSac";
+        List<Model_MauSac> list = new ArrayList<>();
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_GhiDong GD = new Model_GhiDong(rs.getInt(1), rs.getString(2),
+                Model_MauSac TH = new Model_MauSac(rs.getInt(1), rs.getString(2),
                         rs.getString(3));
-                list.add(GD);
+                list.add(TH);
             }
             return list;
         } catch (Exception e) {
@@ -43,17 +40,16 @@ public class GhiDong_repository {
         }
     }
 
-    public Model_GhiDong getTenGhiDong(String ten) {
-        sql = "SELECT  * FROM GhiDong WHERE TenGD = ?";
+    public Model_MauSac getFillTenMS(String ten) {
+        sql = "SELECT  * FROM MauSac WHERE TenMS = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, ten);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Model_GhiDong mdGD = new Model_GhiDong(rs.getInt(1), rs.getString(2),
-                        rs.getString(3));
-                return mdGD;
+                Model_MauSac mdTH = new Model_MauSac(rs.getString(1), rs.getString(2));
+                return mdTH;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,13 +58,29 @@ public class GhiDong_repository {
         return null;
     }
 
-    public int InsertGD(Model_GhiDong ma) {
-        sql = "INSERT INTO GhiDong(MaGD, TenGD) VALUES (?,?)";
+    public int getID(String tenMS) {
+        sql = "SELECT ID FROM MauSac WHERE TenMS = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, ma.getMaGD());
-            ps.setString(2, ma.getLoaiGD());
+            ps.setString(1, tenMS);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ID");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int InsertMS(Model_MauSac ma) {
+        sql = "INSERT INTO MauSac(MaMS, TenMS) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaMS());
+            ps.setString(2, ma.getTenMS());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

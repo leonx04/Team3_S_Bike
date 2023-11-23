@@ -14,7 +14,7 @@ public class Model_ChiTietSanPham {
 
     public Object[] toData2() {
         return new Object[]{
-            this.ID, this.MaCTSP, this.MauSac, this.giaTien, this.thuongHieu.getTenThuongHieu(), this.ghiDong.getLoaiGD(), this.LoaiLip.getLoaiLip(), this.TenKhungXe.getTenKhungXe(), this.TenLopXe.getTenLX(), this.TenPhanhXe.getTenPhanhXe(), this.TenBanhXe.getTenBanhXe(), this.HinhAnhXe.getHinhAnh()
+            this.ID, this.MaCTSP, this.HinhAnhXe, this.SoLuong, this.giaTien, this.thuongHieu.getTenThuongHieu(), this.MauSac.getTenMS(), this.ghiDong.getLoaiGD(), this.LoaiLip.getLoaiLip(), this.TenKhungXe.getTenKhungXe(), this.TenLopXe.getTenLX(), this.TenPhanhXe.getTenPhanhXe(), this.TenBanhXe.getTenBanhXe()
         };
     }
 
@@ -23,30 +23,32 @@ public class Model_ChiTietSanPham {
 
     public long ID;
     public String MaCTSP;
-    public String MauSac;
-    public Model_Thuonghieu thuongHieu = new Model_Thuonghieu();
+    public String HinhAnhXe;
+    public int SoLuong;
     public BigDecimal giaTien;
+    public Model_Thuonghieu thuongHieu = new Model_Thuonghieu();
+    public Model_MauSac MauSac = new Model_MauSac();
     public Model_GhiDong ghiDong = new Model_GhiDong();
     public Model_HeThongTruyenDong LoaiLip = new Model_HeThongTruyenDong();
     public Model_KhungXe TenKhungXe = new Model_KhungXe();
     public Model_LopXe TenLopXe = new Model_LopXe();
     public Model_PhanhXe TenPhanhXe = new Model_PhanhXe();
     public Model_BanhXe TenBanhXe = new Model_BanhXe();
-    public Model_HinhAnhXe HinhAnhXe = new Model_HinhAnhXe();
 
-    public Model_ChiTietSanPham(long ID, String MaCTSP, String MauSac, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe, Model_HinhAnhXe HinhAnhXe) {
+    public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_MauSac MauSac, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe) {
         this.ID = ID;
         this.MaCTSP = MaCTSP;
-        this.MauSac = MauSac;
-        this.thuongHieu = thuongHieu;
+        this.HinhAnhXe = HinhAnhXe;
+        this.SoLuong = SoLuong;
         this.giaTien = giaTien;
+        this.thuongHieu = thuongHieu;
+        this.MauSac = MauSac;
         this.ghiDong = ghiDong;
         this.LoaiLip = LoaiLip;
         this.TenKhungXe = TenKhungXe;
         this.TenLopXe = TenLopXe;
         this.TenPhanhXe = TenPhanhXe;
         this.TenBanhXe = TenBanhXe;
-        this.HinhAnhXe = HinhAnhXe;
     }
 
     public long getID() {
@@ -57,16 +59,24 @@ public class Model_ChiTietSanPham {
         return MaCTSP;
     }
 
-    public String getMauSac() {
-        return MauSac;
+    public String getHinhAnhXe() {
+        return HinhAnhXe;
+    }
+
+    public int getSoLuong() {
+        return SoLuong;
+    }
+
+    public BigDecimal getGiaTien() {
+        return giaTien;
     }
 
     public Model_Thuonghieu getThuongHieu() {
         return thuongHieu;
     }
 
-    public BigDecimal getGiaTien() {
-        return giaTien;
+    public Model_MauSac getMauSac() {
+        return MauSac;
     }
 
     public Model_GhiDong getGhiDong() {
@@ -93,10 +103,6 @@ public class Model_ChiTietSanPham {
         return TenBanhXe;
     }
 
-    public Model_HinhAnhXe getHinhAnhXe() {
-        return HinhAnhXe;
-    }
-
     public void setID(long ID) {
         this.ID = ID;
     }
@@ -105,16 +111,24 @@ public class Model_ChiTietSanPham {
         this.MaCTSP = MaCTSP;
     }
 
-    public void setMauSac(String MauSac) {
-        this.MauSac = MauSac;
+    public void setHinhAnhXe(String HinhAnhXe) {
+        this.HinhAnhXe = HinhAnhXe;
+    }
+
+    public void setSoLuong(int SoLuong) {
+        this.SoLuong = SoLuong;
+    }
+
+    public void setGiaTien(BigDecimal giaTien) {
+        this.giaTien = giaTien;
     }
 
     public void setThuongHieu(Model_Thuonghieu thuongHieu) {
         this.thuongHieu = thuongHieu;
     }
 
-    public void setGiaTien(BigDecimal giaTien) {
-        this.giaTien = giaTien;
+    public void setMauSac(Model_MauSac MauSac) {
+        this.MauSac = MauSac;
     }
 
     public void setGhiDong(Model_GhiDong ghiDong) {
@@ -141,13 +155,9 @@ public class Model_ChiTietSanPham {
         this.TenBanhXe = TenBanhXe;
     }
 
-    public void setHinhAnhXe(Model_HinhAnhXe HinhAnhXe) {
-        this.HinhAnhXe = HinhAnhXe;
-    }
-
     @Override
     public String toString() {
-        return "Model_ChiTietSanPham{" + "ID=" + ID + ", MaCTSP=" + MaCTSP + ", MauSac=" + MauSac + ", thuongHieu=" + thuongHieu + ", giaTien=" + giaTien + ", ghiDong=" + ghiDong + ", LoaiLip=" + LoaiLip + ", TenKhungXe=" + TenKhungXe + ", TenLopXe=" + TenLopXe + ", TenPhanhXe=" + TenPhanhXe + ", TenBanhXe=" + TenBanhXe + ", HinhAnhXe=" + HinhAnhXe + '}';
+        return "Model_ChiTietSanPham{" + "ID=" + ID + ", MaCTSP=" + MaCTSP + ", HinhAnhXe=" + HinhAnhXe + ", SoLuong=" + SoLuong + ", giaTien=" + giaTien + ", thuongHieu=" + thuongHieu + ", MauSac=" + MauSac + ", ghiDong=" + ghiDong + ", LoaiLip=" + LoaiLip + ", TenKhungXe=" + TenKhungXe + ", TenLopXe=" + TenLopXe + ", TenPhanhXe=" + TenPhanhXe + ", TenBanhXe=" + TenBanhXe + '}';
     }
 
 }
