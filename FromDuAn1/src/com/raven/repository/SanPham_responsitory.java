@@ -48,6 +48,38 @@ public class SanPham_responsitory {
         }
     }
 
+    public List<Model_SanPham> getALLSPByTrangThai(String trangThai) {
+        // Lấy dữ liệu từ cơ sở dữ liệu
+        String sql = "SELECT   IDSanPham, MaSP, TenSP, MaHex, Model, SoLuong, TrangThai FROM SanPham WHERE TrangThai = ?";
+        List<Model_SanPham> listSP = new ArrayList<>();
+
+        // Xử lý dữ liệu
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, trangThai);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Model_SanPham sp = new Model_SanPham(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7)
+                );
+                listSP.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        // Trả về kết quả
+        return listSP;
+    }
+
     public Integer insert(Model_SanPham sp) {
         Integer row = null;
         sql = "INSERT INTO SanPham (MaSP, TenSP, MaHex, Model, SoLuong, TrangThai)\n"
