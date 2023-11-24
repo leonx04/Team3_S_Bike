@@ -4,6 +4,7 @@ package com.raven.swing;
 import java.util.Date;
 
 public class KhuyenMai {
+    private int ID;
     private String maKM;
     private String tenKM;
     private int soLuong;
@@ -18,11 +19,13 @@ public class KhuyenMai {
     private Date updateAt;
     private String updateBy;
     private String deletedBy;
+    
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String maKM, String tenKM, int soLuong, String hinhThuc, int mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, String trangThai, Date createAt, String createBy, Date updateAt, String updateBy, String deletedBy) {
+    public KhuyenMai(int ID, String maKM, String tenKM, int soLuong, String hinhThuc, int mucGiamGia, Date thoiGianBatDau, Date thoiGianKetThuc, String moTa, String trangThai, Date createAt, String createBy, Date updateAt, String updateBy, String deletedBy) {
+        this.ID = ID;
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.soLuong = soLuong;
@@ -37,6 +40,14 @@ public class KhuyenMai {
         this.updateAt = updateAt;
         this.updateBy = updateBy;
         this.deletedBy = deletedBy;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getMaKM() {
@@ -150,6 +161,8 @@ public class KhuyenMai {
     public void setDeletedBy(String deletedBy) {
         this.deletedBy = deletedBy;
     }
+
+  
 
     }
 

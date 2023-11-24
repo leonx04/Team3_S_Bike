@@ -57,6 +57,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         for (KhuyenMai km : listKhuyenMaiTatCa) {
             if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
                 searchModel.addRow(new Object[]{
+                    km.getID(),
                     km.getMaKM(),
                     km.getTenKM(),
                     km.getSoLuong(),
@@ -71,6 +72,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         for (KhuyenMai km : listKhuyenMaiHetHan) {
             if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
                 searchModel1.addRow(new Object[]{
+                    km.getID(),
                     km.getMaKM(),
                     km.getTenKM(),
                     km.getSoLuong(),
@@ -85,6 +87,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         for (KhuyenMai km : listKhuyenMaiConHan) {
             if (km.getTenKM().toLowerCase().contains(searchtenNV.toLowerCase())) {
                 searchModel2.addRow(new Object[]{
+                    km.getID(),
                     km.getMaKM(),
                     km.getTenKM(),
                     km.getSoLuong(),
@@ -106,7 +109,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         listKhuyenMaiTatCa = repo.getAllKM();
         for (KhuyenMai km : listKhuyenMaiTatCa) {
             tbModel.addRow(new Object[]{
-                //                km.getID(),
+                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -125,7 +128,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         listKhuyenMaiConHan = repo.getAllKMconHan();
         for (KhuyenMai km : listKhuyenMaiConHan) {
             tbModelConhan.addRow(new Object[]{
-                //                km.getID(),
+                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -144,7 +147,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         listKhuyenMaiHetHan = repo.getAllKMHetHan();
         for (KhuyenMai km : listKhuyenMaiHetHan) {
             tbModelhetHan.addRow(new Object[]{
-                //                km.getID(),
+                km.getID(),
                 km.getMaKM(),
                 km.getTenKM(),
                 km.getSoLuong(),
@@ -159,6 +162,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     }
 
     KhuyenMai getFroṃ() {
+        int ID = Integer.parseInt(txtID.getText());
         String MaKM = txtMa.getText();
         String TenKM = txtTenKM.getText();
         int SoLuong = Integer.parseInt(txtSoLuong.getText());
@@ -183,7 +187,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         String NguoiSua = txtNguoiSua.getText();
         Date NgaySua = DateNgaySua.getDate();
         String NguoiXoa = txtNguoiXoa.getText();
-        return new KhuyenMai(MaKM, TenKM, SoLuong, hinhThuc, MucGiamGia, NgayBatDau, NgayThoiGianKetThuc, Mota, TrangThai, NgayTao, NguoiTao, NgaySua, NguoiSua, NguoiXoa);
+        return new KhuyenMai(ID,MaKM, TenKM, SoLuong, hinhThuc, MucGiamGia, NgayBatDau, NgayThoiGianKetThuc, Mota, TrangThai, NgayTao, NguoiTao, NgaySua, NguoiSua, NguoiXoa);
     }
 
     @SuppressWarnings("unchecked")
@@ -232,6 +236,8 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         rdoConHan = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -269,7 +275,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Hình thức");
-        panelBorder4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 83, -1));
+        panelBorder4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 83, -1));
 
         buttonGroup1.add(rdoTheoPT);
         rdoTheoPT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -279,7 +285,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoTheoPTActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoTheoPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
+        panelBorder4.add(rdoTheoPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
         buttonGroup1.add(rdoSoTien);
         rdoSoTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -289,14 +295,14 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoSoTienActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
+        panelBorder4.add(rdoSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         panelBorder4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 118, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Mức giảm giá");
-        panelBorder4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 94, -1));
+        jLabel7.setText("ID Khuyến mãi");
+        panelBorder4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 94, -1));
         panelBorder4.add(txtMucGiamGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 170, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -314,7 +320,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Trạng thái");
-        panelBorder4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 80, -1));
+        panelBorder4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Ngày tạo");
@@ -380,7 +386,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoHetHanActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoHetHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
+        panelBorder4.add(rdoHetHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, -1, -1));
 
         buttonGroup2.add(rdoConHan);
         rdoConHan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -390,7 +396,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
                 rdoConHanActionPerformed(evt);
             }
         });
-        panelBorder4.add(rdoConHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+        panelBorder4.add(rdoConHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, -1, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tìm kiếm"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -398,18 +404,25 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         panelBorder4.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 1270, 50));
 
+        txtID.setEnabled(false);
+        panelBorder4.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 170, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel18.setText("Mức giảm giá");
+        panelBorder4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 94, -1));
+
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tbKhuyenMaiTatCa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã khuyến mại", "Tên Khuyến mại", "Số lượng ", "Hình thức", "Mức Giảm Giá", "Ngày kết thúc", "Ngày bắt đầu", "Trạng Thái"
+                "ID", "Mã khuyến mại", "Tên Khuyến mại", "Số lượng ", "Hình thức", "Mức Giảm Giá", "Ngày kết thúc", "Ngày bắt đầu", "Trạng Thái"
             }
         ));
         tbKhuyenMaiTatCa.setSelectionBackground(new java.awt.Color(255, 255, 255));
@@ -569,6 +582,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
             return;
         }
         KhuyenMai km = listKhuyenMaiTatCa.get(row);
+        txtID.setText(String.valueOf(km.getID()));
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
         txtMucGiamGia.setText(String.valueOf(km.getMucGiamGia()));
@@ -601,6 +615,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
             return;
         }
         KhuyenMai km = listKhuyenMaiHetHan.get(row);
+        txtID.setText(String.valueOf(km.getID()));
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
         txtMucGiamGia.setText(String.valueOf(km.getMucGiamGia()));
@@ -632,6 +647,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
             return;
         }
         KhuyenMai km = listKhuyenMaiConHan.get(row);
+        txtID.setText(String.valueOf(km.getID()));
         txtMa.setText(km.getMaKM());
         txtTenKM.setText(km.getTenKM());
         txtMucGiamGia.setText(String.valueOf(km.getMucGiamGia()));
@@ -685,8 +701,8 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         if(row < 0) return;
 
         KhuyenMai km = getFroṃ();
-        String MaKM = listKhuyenMaiTatCa.get(row).getMaKM();
-        km.setMaKM(MaKM);
+        int ID = listKhuyenMaiTatCa.get(row).getID();
+        km.setID(ID);
         
         if(repo.update(km)){
             loadDataTATCA();
@@ -709,8 +725,8 @@ public class From_KhuyenMai extends javax.swing.JPanel {
             return;
         }
         
-        String MaKM = listKhuyenMaiTatCa.get(row).getMaKM();
-        if(repo.deleteById(MaKM)){
+        int ID = listKhuyenMaiTatCa.get(row).getID();
+        if(repo.deleteById(ID)){
             loadDataTATCA();
             Clear();
             JOptionPane.showMessageDialog(this, "Xóa thành công");
@@ -741,6 +757,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -765,6 +782,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTable tbKhuyenMaiConHan;
     private javax.swing.JTable tbKhuyenMaiHetHan;
     private javax.swing.JTable tbKhuyenMaiTatCa;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtMucGiamGia;
