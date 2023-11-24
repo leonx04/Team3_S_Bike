@@ -80,7 +80,6 @@ public class BanhXe_repository {
     public int InsertBX(Model_BanhXe ma) {
         sql = "INSERT INTO BanhXe(MaBX, TenBX) VALUES (?,?)";
         try {
-            con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, ma.getMaBX());
             ps.setString(2, ma.getTenBanhXe());
@@ -91,6 +90,6 @@ public class BanhXe_repository {
         }
         return 0;
     }
-    
+
     
 }

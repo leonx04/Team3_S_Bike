@@ -50,8 +50,8 @@ public class HeThongTruyenDong_repository {
             ps = con.prepareStatement(sql);
             ps.setString(1, ten);
             while (rs.next()) {
-                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong( rs.getInt(1),
-                        rs.getString(2),rs.getString(3));
+                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong(rs.getInt(1),
+                        rs.getString(2), rs.getString(3));
                 return mdHTTD;
             }
         } catch (Exception e) {
@@ -59,5 +59,20 @@ public class HeThongTruyenDong_repository {
 
         }
         return null;
+    }
+
+    public int InsertHTTD(Model_HeThongTruyenDong ma) {
+        sql = "INSERT INTO HeThongTruyenDong(MaHTTD, TenHTTD) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaHTTD());
+            ps.setString(2, ma.getLoaiLip());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
     }
 }

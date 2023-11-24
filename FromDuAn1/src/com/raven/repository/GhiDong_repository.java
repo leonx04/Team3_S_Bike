@@ -61,7 +61,6 @@ public class GhiDong_repository {
         }
         return null;
     }
-
     public int InsertGD(Model_GhiDong ma) {
         sql = "INSERT INTO GhiDong(MaGD, TenGD) VALUES (?,?)";
         try {

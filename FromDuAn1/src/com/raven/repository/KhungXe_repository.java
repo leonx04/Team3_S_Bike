@@ -61,4 +61,19 @@ public class KhungXe_repository {
         }
         return null;
     }
+
+    public int InsertKX(Model_KhungXe ma) {
+        sql = "INSERT INTO KhungXe(MaKX,TenKX) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaKX());
+            ps.setString(2, ma.getTenKhungXe());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
 }

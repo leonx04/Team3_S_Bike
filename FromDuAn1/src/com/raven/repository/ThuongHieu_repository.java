@@ -70,7 +70,6 @@ public class ThuongHieu_repository {
         }
         return -1;
     }
-
     public int InsertTH(Model_Thuonghieu ma) {
         sql = "INSERT INTO ThuongHieu(MaTH, TenTH) VALUES (?,?)";
         try {

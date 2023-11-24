@@ -74,4 +74,19 @@ public class PhanhXe_repository {
         }
         return -1;
     }
+
+    public int InsertPX(Model_PhanhXe ma) {
+        sql = "INSERT INTO PhanhXe(MaPX,TenPX) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaPX());
+            ps.setString(2, ma.getTenPhanhXe());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
 }

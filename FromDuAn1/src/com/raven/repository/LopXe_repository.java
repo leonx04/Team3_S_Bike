@@ -58,4 +58,19 @@ public class LopXe_repository {
         }
         return null;
     }
+
+    public int InsertLX(Model_LopXe ma) {
+        sql = "INSERT INTO LopXe(MaLX,TenLX) VALUES (?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma.getMaLX());
+            ps.setString(2, ma.getTenLX());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
 }
