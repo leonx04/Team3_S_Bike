@@ -144,7 +144,22 @@ public class KhuyenMai_repository {
             String sql = "UPDATE KhuyenMai SET TenKM=?,SoLuong=?,HinhThuc=?,MucGiamGia=?,ThoiGianBatDau=?,ThoiGianKetThuc=?,MoTa=?,TrangThai=?,Create_at=?,Create_by=?,Update_at=?,Update_by=?,Deleted_by=? WHERE MaKM=?";
 
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, km.getMaKM());
+//            stm.setString(1, km.getMaKM());
+//            stm.setString(2, km.getTenKM());
+//            stm.setInt(3, km.getSoLuong());
+//            stm.setString(4, km.getHinhThuc());
+//            stm.setInt(5, km.getMucGiamGia());
+//            stm.setString(6, dateFormat.format(km.getThoiGianBatDau()));
+//            stm.setString(7, dateFormat.format(km.getThoiGianKetThuc()));
+//            stm.setString(8, km.getMoTa());
+//            stm.setString(9, km.getTrangThai());
+//            stm.setString(10, dateFormat.format(km.getCreateAt()));
+//            stm.setString(11, km.getCreateBy());
+//            stm.setString(12, dateFormat.format(km.getUpdateAt()));
+//            stm.setString(13, km.getUpdateBy());
+//            stm.setString(14, km.getDeletedBy());
+//=====
+//            stm.setString(1, km.getMaKM());
             stm.setString(2, km.getTenKM());
             stm.setInt(3, km.getSoLuong());
             stm.setString(4, km.getHinhThuc());
@@ -158,7 +173,7 @@ public class KhuyenMai_repository {
 //            stm.setString(12, dateFormat.format(km.getUpdateAt()));
             stm.setString(11, km.getUpdateBy());
             stm.setString(12, km.getDeletedBy());
-            stm.executeUpdate();
+            stm.executeUpdate();            
             return true;
 
         } catch (Exception e) {

@@ -162,7 +162,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         String MaKM = txtMa.getText();
         String TenKM = txtTenKM.getText();
         int SoLuong = Integer.parseInt(txtSoLuong.getText());
-        int MucGiamGia = Integer.parseInt(txtSoLuong.getText());
+        int MucGiamGia = Integer.parseInt(txtMucGiamGia.getText());
         String hinhThuc;
         if (rdoTheoPT.isSelected()) {
             hinhThuc = "Theo%";
@@ -232,7 +232,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         rdoConHan = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -399,9 +398,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
 
         panelBorder4.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 1270, 50));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Khuyến mãi");
-
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -521,13 +517,8 @@ public class From_KhuyenMai extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addGap(588, 588, 588)
-                                .addComponent(jLabel1))
-                            .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(panelBorder4, javax.swing.GroupLayout.PREFERRED_SIZE, 1301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addComponent(panelBorder4, javax.swing.GroupLayout.PREFERRED_SIZE, 1301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -537,9 +528,7 @@ public class From_KhuyenMai extends javax.swing.JPanel {
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5)
+                .addGap(50, 50, 50)
                 .addComponent(panelBorder4, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -744,7 +733,6 @@ public class From_KhuyenMai extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

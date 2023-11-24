@@ -5,6 +5,13 @@
  */
 package com.raven.main;
 
+import com.raven.component.Header_BanHang;
+import com.raven.component.Header_HoaDon;
+import com.raven.component.Header_KhachHang;
+import com.raven.component.Header_KhuyenMai;
+import com.raven.component.Header_NhanVien;
+import com.raven.component.Header_SanPham;
+import com.raven.component.Header_Thongke;
 import com.raven.event.EventMenuSelected;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
@@ -31,18 +38,21 @@ public class Main extends javax.swing.JFrame {
                 if (index == 1) {
 
                 } else if (index == 3) {
-
+                    setFrom2(new Header_BanHang() );
                 } else if (index == 9) {
+                    setFrom2(new Header_HoaDon() );
 
                 } else if (index == 11) {
+                    setFrom2(new Header_SanPham() );
                     setFrom(new JPanel_SanPham());
                 } else if (index == 13) {
-
+                    setFrom2(new Header_KhachHang() );
                 } else if (index == 15) {
-
+                    setFrom2(new Header_Thongke() );
                 } else if (index == 17) {
-
+                    setFrom2(new Header_NhanVien());
                 } else if (index == 19) {
+                    setFrom2(new Header_KhuyenMai());
                     setFrom(new From_KhuyenMai());
                 }
             }
@@ -56,6 +66,12 @@ public class Main extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
+        public void setFrom2(JComponent com){
+        panel_header.removeAll();
+        panel_header.add(com);
+       panel_header.repaint();
+        panel_header.revalidate();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,8 +84,8 @@ public class Main extends javax.swing.JFrame {
 
         panelBorder1 = new com.raven.swing.PanelBorder();
         menu = new com.raven.component.Menu();
-        header2 = new com.raven.component.Header();
         mainPanel = new javax.swing.JPanel();
+        panel_header = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -78,11 +94,12 @@ public class Main extends javax.swing.JFrame {
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelBorder1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        panelBorder1.add(header2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 1320, -1));
-
         mainPanel.setLayout(new java.awt.BorderLayout());
         panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 50, 1320, 800));
+
+        panel_header.setOpaque(false);
+        panel_header.setLayout(new java.awt.BorderLayout());
+        panelBorder1.add(panel_header, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 1320, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,9 +152,9 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.component.Header header2;
     private javax.swing.JPanel mainPanel;
     private com.raven.component.Menu menu;
     private com.raven.swing.PanelBorder panelBorder1;
+    private javax.swing.JPanel panel_header;
     // End of variables declaration//GEN-END:variables
 }
