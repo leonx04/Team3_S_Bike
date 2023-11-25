@@ -5,7 +5,10 @@
  */
 package com.raven.main;
 
+import com.raven.NhanVien.NhanVien;
 import com.raven.event.EventMenuSelected;
+import com.raven.swing.XImage;
+import com.raven.view.Bill_Jpanel;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
@@ -22,6 +25,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        setIconImage(XImage.getAppIcon());
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -33,15 +37,15 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
 
                 } else if (index == 9) {
-
+                    setFrom(new Bill_Jpanel());
                 } else if (index == 11) {
                     setFrom(new JPanel_SanPham());
                 } else if (index == 13) {
 
                 } else if (index == 15) {
-
+                    
                 } else if (index == 17) {
-
+                    setFrom(new NhanVien());
                 } else if (index == 19) {
                     setFrom(new From_KhuyenMai());
                 }
@@ -81,8 +85,10 @@ public class Main extends javax.swing.JFrame {
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         panelBorder1.add(header2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 1320, -1));
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         mainPanel.setLayout(new java.awt.BorderLayout());
-        panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 50, 1320, 800));
+        panelBorder1.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 1320, 790));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +98,9 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
