@@ -101,7 +101,7 @@ public class SanPham_responsitory {
     }
 
     public int update(Model_SanPham sp, String ma) {
-        sql = " UPDATE SanPham SET TenSP = ?, MaCode = ? , Model = ?, SoLuong =? , TrangThai = ? WHERE MaSP = ? ";
+        sql = " UPDATE SanPham SET TenSP = ?, MaHex = ? , Model = ?, SoLuong =? , TrangThai = ? WHERE MaSP = ? ";
         con = DBConnect.getConnection();
         try {
             ps = con.prepareStatement(sql);

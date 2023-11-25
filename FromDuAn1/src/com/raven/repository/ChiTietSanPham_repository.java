@@ -97,28 +97,48 @@ public class ChiTietSanPham_repository {
         }
     }
 
-    public int insertSP(Model_ChiTietSanPham ma) {
-        sql = "INSERT INTO ChiTietSanPham "
-                + "(MaCTSP, HinhAnh, SoLuong, GiaTien, IDThuongHieu, IDMauSac, IDGhiDong, IDHeThongTruyenDong, IDKhungXe, IDLopXe, IDPhanhXe, IDBanhXe) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public int insertSP(Model_ChiTietSanPham ctSP) {
+        String sql = "INSERT INTO ChiTietSanPham "
+                + "(MaCTSP, HinhAnh, SoLuong, GiaTien, TrangThai, IDThuongHieu, IDMauSac, IDGhiDong, IDHeThongTruyenDong, IDKhungXe, IDLopXe, IDPhanhXe, IDBanhXe, IDSanPham, Create_by, Update_at, Update_by, Deleted_by, Create_at) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            con = DBConnect.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setObject(1, ma.getMaCTSP());
-            ps.setObject(2, ma.getHinhAnhXe());
-            ps.setObject(3, ma.getSoLuong());
-            ps.setObject(4, ma.getGiaTien());
-            ps.setObject(5, ma.getThuongHieu().getId());
-            ps.setObject(6, ma.getMauSac().getID());
-            ps.setObject(7, ma.getGhiDong().getID());
-            System.err.println("đã chạy qua");
-            ps.setObject(8, ma.getLoaiLip().getID());
-            System.out.println("1"+ma.getLoaiLip().getID());
-            ps.setObject(9, ma.getTenKhungXe().getID());
-            ps.setObject(10, ma.getTenLopXe().getID());
-            ps.setObject(11, ma.getTenPhanhXe().getID());
-            ps.setObject(12, ma.getTenBanhXe().getID());
-            
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setObject(1, ctSP.getMaCTSP());
+            ps.setObject(2, ctSP.getHinhAnhXe());
+            ps.setObject(3, ctSP.getSoLuong());
+            ps.setObject(4, ctSP.getGiaTien());
+            ps.setObject(5, ctSP.getThuongHieu().getId());
+            ps.setObject(6, ctSP.getMauSac().getID());
+            ps.setObject(7, ctSP.getGhiDong().getID());
+            ps.setObject(8, ctSP.getLoaiLip().getID());
+            ps.setObject(9, ctSP.getTenKhungXe().getID());
+            ps.setObject(10, ctSP.getTenLopXe().getID());
+            ps.setObject(11, ctSP.getTenPhanhXe().getID());
+            ps.setObject(12, ctSP.getTenBanhXe().getID());
+            ps.setObject(13, ctSP.getSanPham());
+            ps.setObject(14, "DUNGNX");
+            ps.setTimestamp(15, new Timestamp(System.currentTimeMillis()));
+            ps.setObject(16, "DUNGNX");
+            ps.setObject(17, "");
+            ps.setTimestamp(18, new Timestamp(System.currentTimeMillis()));
+
+            // Execute the INSERT statement and return the number of affected rows
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int deleteSP(String maCTSP) {
+        String sql = "DELETE FROM ChiTietSanPham WHERE MaCTSP = ?";
+
+        try {
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, maCTSP);
+
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

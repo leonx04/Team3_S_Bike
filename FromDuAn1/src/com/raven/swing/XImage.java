@@ -19,28 +19,28 @@ import javax.swing.ImageIcon;
  * @author Admin
  */
 public class XImage {
-    public static Image getAppIcon(){
-        URL url = XImage.class.getResource("/com/raven/icons/1.png");
+
+    public static Image getAppIcon() {
+        URL url = XImage.class.getResource("/com/raven/icon/anh1.jpg");
         return new ImageIcon(url).getImage();
-    }    
-    
-    public static void save(File src){
+    }
+
+    public static void save(File src) {
         File dst = new File("logos", src.getName());
-        if(!dst.getParentFile().exists()){
+        if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs();
         }
         try {
             Path from = Paths.get(src.getAbsolutePath());
             Path to = Paths.get(dst.getAbsolutePath());
-            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);           
+            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
-    
-    public static ImageIcon read(String fileName){
+
+    public static ImageIcon read(String fileName) {
         File path = new File("logos", fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
 }
-

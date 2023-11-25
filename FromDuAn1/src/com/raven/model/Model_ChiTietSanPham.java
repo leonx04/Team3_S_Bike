@@ -34,6 +34,7 @@ public class Model_ChiTietSanPham {
     public Model_LopXe TenLopXe = new Model_LopXe();
     public Model_PhanhXe TenPhanhXe = new Model_PhanhXe();
     public Model_BanhXe TenBanhXe = new Model_BanhXe();
+    public Model_SanPham SanPham = new Model_SanPham();
 
     public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_MauSac MauSac, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe) {
         this.ID = ID;
@@ -153,6 +154,14 @@ public class Model_ChiTietSanPham {
 
     public void setTenBanhXe(Model_BanhXe TenBanhXe) {
         this.TenBanhXe = TenBanhXe;
+    }
+
+    public Model_SanPham getSanPham() {
+        return SanPham;
+    }
+
+    public void setSanPham(Model_SanPham SanPham) {
+        this.SanPham = SanPham;
     }
 
     @Override

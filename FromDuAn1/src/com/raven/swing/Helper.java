@@ -1,13 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.raven.swing;
 
-/**
- *
- * @author dungn
- */
+import com.raven.model.Model_NhanVien;
+
 public class Helper {
-    
+
+    public static Model_NhanVien user = null;
+
+    public static void clear() {
+        Helper.user = null;
+    }
+
+    public static boolean isLogin() {
+        return Helper.user != null;
+    }
+
+    public static boolean isManager() {
+        if (!isLogin()) {
+            return false;
+        }
+
+        // Kiểm tra xem đã là manager hay chưa
+        if ("manager".equals(user.getChucvu())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static Model_NhanVien getUser() {
+        return user;
+    }
+
+    public static void setUser(Model_NhanVien user) {
+        Helper.user = user;
+    }
 }

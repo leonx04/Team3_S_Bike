@@ -5,7 +5,9 @@
  */
 package com.raven.main;
 
+import com.raven.NhanVien.NhanVien;
 import com.raven.event.EventMenuSelected;
+import com.raven.swing.XImage;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
@@ -22,6 +24,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        setIconImage(XImage.getAppIcon());
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -39,9 +42,9 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 13) {
 
                 } else if (index == 15) {
-
+                    
                 } else if (index == 17) {
-
+                    setFrom(new NhanVien());
                 } else if (index == 19) {
                     setFrom(new From_KhuyenMai());
                 }
