@@ -8,6 +8,7 @@ package com.raven.main;
 import com.raven.NhanVien.NhanVien;
 import com.raven.event.EventMenuSelected;
 import com.raven.swing.XImage;
+import com.raven.view.Bill_Jpanel;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
@@ -36,7 +37,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
 
                 } else if (index == 9) {
-
+                    setFrom(new Bill_Jpanel());
                 } else if (index == 11) {
                     setFrom(new JPanel_SanPham());
                 } else if (index == 13) {
