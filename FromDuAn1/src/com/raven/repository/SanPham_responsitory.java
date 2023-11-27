@@ -80,6 +80,24 @@ public class SanPham_responsitory {
         return listSP;
     }
 
+    public Model_SanPham getFillTenSP(String ten) {
+        sql = "SELECT  * FROM SanPham WHERE TenSP = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ten);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Model_SanPham mdSP = new Model_SanPham(rs.getString(1), rs.getString(2));
+                return mdSP;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
     public Integer insert(Model_SanPham sp) {
         Integer row = null;
         sql = "INSERT INTO SanPham (MaSP, TenSP, MaHex, Model, SoLuong, TrangThai)\n"
@@ -134,7 +152,47 @@ public class SanPham_responsitory {
     }
 
     public Model_SanPham selecbyMa(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "EXEC TongSoLuongTheoMaSP '?' ";
+        List<Model_SanPham> listSL = new ArrayList<>();
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Model_SanPham sp = new Model_SanPham(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7)
+                );
+                listSL.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return listSL.get(0);
     }
 
+    public void updateSoLuong(String maSP) {
+        String sql = "UPDATE SanPham SET SoLuong ="
+                + " (SELECT SUM(SoLuong) FROM ChiTietSanPham WHERE IDSanPham = "
+                + " (SELECT IDSanPham FROM SanPham WHERE MaSP = ?))"
+                + "WHERE MaSP = ?";
+
+        try {
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, maSP);
+            ps.setString(2, maSP);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 }

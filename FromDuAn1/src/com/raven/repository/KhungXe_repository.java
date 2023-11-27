@@ -76,4 +76,31 @@ public class KhungXe_repository {
         }
         return 0;
     }
+
+    public int updateKhungXeByMaGD(Model_KhungXe Khungxe) {
+        sql = "UPDATE KhungXe SET TenKX = ? WHERE MaKX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, Khungxe.getTenKhungXe());
+            ps.setString(2, Khungxe.getMaKX());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteKhungXeById(String ma) {
+        sql = "DELETE FROM KhungXe WHERE MaKX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

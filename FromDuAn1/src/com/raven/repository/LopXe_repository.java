@@ -73,4 +73,31 @@ public class LopXe_repository {
         }
         return 0;
     }
+
+    public int updateLopXeByMaGD(Model_LopXe ghiDong) {
+        sql = "UPDATE LopXe SET TenLX = ? WHERE MaLX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ghiDong.getTenLX());
+            ps.setString(2, ghiDong.getMaLX());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteLopXeById(String ma) {
+        sql = "DELETE FROM LopXe WHERE MaLX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -93,9 +93,10 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        btnADDBX = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnADD = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,19 +133,31 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Tìm kiếm");
 
-        btnADDBX.setText("Thêm");
-        btnADDBX.addActionListener(new java.awt.event.ActionListener() {
+        btnADD.setText("Thêm");
+        btnADD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnADDBXActionPerformed(evt);
+                btnADDActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cập nhật");
+        btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Thoát");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -164,22 +177,26 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                             .addComponent(txtMa))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnADDBX)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton3)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton8)
-                        .addGap(0, 126, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField3)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnADD)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(btnUpdate)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnDelete)
+                                        .addGap(34, 34, 34)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton8)
+                                    .addComponent(jButton1))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +217,10 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnADDBX)
-                    .addComponent(jButton3)
-                    .addComponent(jButton8))
+                    .addComponent(btnADD)
+                    .addComponent(btnUpdate)
+                    .addComponent(jButton8)
+                    .addComponent(btnDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -219,7 +237,7 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
         this.show(index);
     }//GEN-LAST:event_tblMouseClicked
 
-    private void btnADDBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADDBXActionPerformed
+    private void btnADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADDActionPerformed
         Model_BanhXe bx = read();
         BanhXe_repository repoBX = new BanhXe_repository();
         if (repoBX.InsertBX(bx) > 0) {
@@ -230,7 +248,41 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
 
-    }//GEN-LAST:event_btnADDBXActionPerformed
+    }//GEN-LAST:event_btnADDActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật không?");
+        if (option == JOptionPane.YES_OPTION) {
+            Model_BanhXe gd = read();
+            BanhXe_repository repoGX = new BanhXe_repository();
+            if (repoGX.updateBanhXeByMaGD(gd) > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                Fill(repoGX.getAllBX());
+                this.clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+            }
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        String maGD = tbl.getValueAt(index, 1).toString();
+
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không?");
+        if (option == JOptionPane.YES_OPTION) {
+
+            BanhXe_repository repo = new BanhXe_repository();
+            if (repo.deleteBanhXeById(maGD) > 0) {
+                model.removeRow(index);
+                Fill(res.getAllBX());
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,9 +320,10 @@ public class BanhXe_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnADDBX;
+    private javax.swing.JButton btnADD;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

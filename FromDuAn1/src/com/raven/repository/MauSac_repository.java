@@ -88,4 +88,31 @@ public class MauSac_repository {
         }
         return 0;
     }
+
+    public int updateMauSacByMaGD(Model_MauSac ms) {
+        sql = "UPDATE MauSac SET TenMS = ? WHERE MaMS = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ms.getTenMS());
+            ps.setString(2, ms.getMaMS());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteMauSacById(String ma) {
+        sql = "DELETE FROM MauSac WHERE MaMS = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

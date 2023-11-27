@@ -30,6 +30,12 @@ public class Model_SanPham {
         this.TrangThai = TrangThai;
     }
 
+    public Model_SanPham(String maSP, String tenSP) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+    }
+
+    
     public long getID() {
         return ID;
     }

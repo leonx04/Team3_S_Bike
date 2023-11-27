@@ -5,6 +5,7 @@
 package com.raven.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ public class Model_ChiTietSanPham {
 
     public Object[] toData2() {
         return new Object[]{
-            this.ID, this.MaCTSP, this.HinhAnhXe, this.SoLuong, this.giaTien, this.thuongHieu.getTenThuongHieu(), this.MauSac.getTenMS(), this.ghiDong.getLoaiGD(), this.LoaiLip.getLoaiLip(), this.TenKhungXe.getTenKhungXe(), this.TenLopXe.getTenLX(), this.TenPhanhXe.getTenPhanhXe(), this.TenBanhXe.getTenBanhXe()
+            this.ID, this.MaCTSP, this.HinhAnhXe, this.SoLuong, this.giaTien, this.thuongHieu.getTenThuongHieu(), this.MauSac.getTenMS(), this.ghiDong.getLoaiGD(), this.LoaiLip.getLoaiLip(), this.TenKhungXe.getTenKhungXe(), this.TenLopXe.getTenLX(), this.TenPhanhXe.getTenPhanhXe(), this.TenBanhXe.getTenBanhXe(), this.SanPham.getTenSP()
         };
     }
 
@@ -26,6 +27,7 @@ public class Model_ChiTietSanPham {
     public String HinhAnhXe;
     public int SoLuong;
     public BigDecimal giaTien;
+    public String TrangThai;
     public Model_Thuonghieu thuongHieu = new Model_Thuonghieu();
     public Model_MauSac MauSac = new Model_MauSac();
     public Model_GhiDong ghiDong = new Model_GhiDong();
@@ -35,23 +37,28 @@ public class Model_ChiTietSanPham {
     public Model_PhanhXe TenPhanhXe = new Model_PhanhXe();
     public Model_BanhXe TenBanhXe = new Model_BanhXe();
     public Model_SanPham SanPham = new Model_SanPham();
+    public String Create_by;
+    private Date Update_at;
+    public String Update_by;
+    public String Deleted_by;
+    private Date Create_at;
 
-    public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_MauSac MauSac, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe) {
+    public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, String TrangThai, String Create_by, Date Update_at, String Update_by, String Deleted_by, Date Create_at) {
         this.ID = ID;
         this.MaCTSP = MaCTSP;
         this.HinhAnhXe = HinhAnhXe;
         this.SoLuong = SoLuong;
         this.giaTien = giaTien;
-        this.thuongHieu = thuongHieu;
-        this.MauSac = MauSac;
-        this.ghiDong = ghiDong;
-        this.LoaiLip = LoaiLip;
-        this.TenKhungXe = TenKhungXe;
-        this.TenLopXe = TenLopXe;
-        this.TenPhanhXe = TenPhanhXe;
-        this.TenBanhXe = TenBanhXe;
+        this.TrangThai = TrangThai;
+        this.Create_by = Create_by;
+        this.Update_at = Update_at;
+        this.Update_by = Update_by;
+        this.Deleted_by = Deleted_by;
+        this.Create_at = Create_at;
     }
 
+    
+    
     public long getID() {
         return ID;
     }
@@ -70,6 +77,10 @@ public class Model_ChiTietSanPham {
 
     public BigDecimal getGiaTien() {
         return giaTien;
+    }
+
+    public String getTrangThai() {
+        return TrangThai;
     }
 
     public Model_Thuonghieu getThuongHieu() {
@@ -104,6 +115,30 @@ public class Model_ChiTietSanPham {
         return TenBanhXe;
     }
 
+    public Model_SanPham getSanPham() {
+        return SanPham;
+    }
+
+    public String getCreate_by() {
+        return Create_by;
+    }
+
+    public Date getUpdate_at() {
+        return Update_at;
+    }
+
+    public String getUpdate_by() {
+        return Update_by;
+    }
+
+    public String getDeleted_by() {
+        return Deleted_by;
+    }
+
+    public Date getCreate_at() {
+        return Create_at;
+    }
+
     public void setID(long ID) {
         this.ID = ID;
     }
@@ -122,6 +157,10 @@ public class Model_ChiTietSanPham {
 
     public void setGiaTien(BigDecimal giaTien) {
         this.giaTien = giaTien;
+    }
+
+    public void setTrangThai(String TrangThai) {
+        this.TrangThai = TrangThai;
     }
 
     public void setThuongHieu(Model_Thuonghieu thuongHieu) {
@@ -156,11 +195,60 @@ public class Model_ChiTietSanPham {
         this.TenBanhXe = TenBanhXe;
     }
 
-    public Model_SanPham getSanPham() {
-        return SanPham;
+    public void setSanPham(Model_SanPham SanPham) {
+        this.SanPham = SanPham;
     }
 
-    public void setSanPham(Model_SanPham SanPham) {
+    public void setCreate_by(String Create_by) {
+        this.Create_by = Create_by;
+    }
+
+    public void setUpdate_at(Date Update_at) {
+        this.Update_at = Update_at;
+    }
+
+    public void setUpdate_by(String Update_by) {
+        this.Update_by = Update_by;
+    }
+
+    public void setDeleted_by(String Deleted_by) {
+        this.Deleted_by = Deleted_by;
+    }
+
+    public void setCreate_at(Date Create_at) {
+        this.Create_at = Create_at;
+    }
+
+    public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_MauSac MauSac, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe) {
+        this.ID = ID;
+        this.MaCTSP = MaCTSP;
+        this.HinhAnhXe = HinhAnhXe;
+        this.SoLuong = SoLuong;
+        this.giaTien = giaTien;
+        this.thuongHieu = thuongHieu;
+        this.MauSac = MauSac;
+        this.ghiDong = ghiDong;
+        this.LoaiLip = LoaiLip;
+        this.TenKhungXe = TenKhungXe;
+        this.TenLopXe = TenLopXe;
+        this.TenPhanhXe = TenPhanhXe;
+        this.TenBanhXe = TenBanhXe;
+    }
+    
+    public Model_ChiTietSanPham(long ID, String MaCTSP, String HinhAnhXe, int SoLuong, BigDecimal giaTien, Model_Thuonghieu thuongHieu, Model_MauSac MauSac, Model_GhiDong ghiDong, Model_HeThongTruyenDong LoaiLip, Model_KhungXe TenKhungXe, Model_LopXe TenLopXe, Model_PhanhXe TenPhanhXe, Model_BanhXe TenBanhXe, Model_SanPham SanPham) {
+        this.ID = ID;
+        this.MaCTSP = MaCTSP;
+        this.HinhAnhXe = HinhAnhXe;
+        this.SoLuong = SoLuong;
+        this.giaTien = giaTien;
+        this.thuongHieu = thuongHieu;
+        this.MauSac = MauSac;
+        this.ghiDong = ghiDong;
+        this.LoaiLip = LoaiLip;
+        this.TenKhungXe = TenKhungXe;
+        this.TenLopXe = TenLopXe;
+        this.TenPhanhXe = TenPhanhXe;
+        this.TenBanhXe = TenBanhXe;
         this.SanPham = SanPham;
     }
 

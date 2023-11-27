@@ -91,5 +91,30 @@ public class BanhXe_repository {
         return 0;
     }
 
-    
+    public int updateBanhXeByMaGD(Model_BanhXe ghiDong) {
+        sql = "UPDATE BanhXe SET TenBX = ? WHERE MaBX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ghiDong.getTenBanhXe());
+            ps.setString(2, ghiDong.getMaBX());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteBanhXeById(String ma) {
+        sql = "DELETE FROM BanhXe WHERE MaBX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

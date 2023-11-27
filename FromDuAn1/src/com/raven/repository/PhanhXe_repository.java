@@ -89,4 +89,31 @@ public class PhanhXe_repository {
         }
         return 0;
     }
+
+    public int deletePhanhXeById(String ma) {
+        sql = "DELETE FROM PhanhXe WHERE MaPX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int updatePhanhXeByMa(Model_PhanhXe px) {
+        sql = "UPDATE PhanhXe SET TenPX = ? WHERE MaPX = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, px.getTenPhanhXe());
+            ps.setString(2, px.getMaPX());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -44,7 +44,7 @@ public class HeThongTruyenDong_repository {
     }
 
     public Model_HeThongTruyenDong getTenLip(String ten) {
-        sql = "SELECT IDHeThongTruyenDong, MaHTTD, TenHTTD FROM HeThongTruyenDong WHERE TenHTTD = ?";
+        sql = "SELECT * FROM HeThongTruyenDong WHERE TenHTTD = ?";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -72,6 +72,51 @@ public class HeThongTruyenDong_repository {
         } catch (Exception e) {
             e.printStackTrace();
 
+        }
+        return 0;
+    }
+
+    public Model_HeThongTruyenDong getByID(int id) {
+        sql = "SELECT IDHeThongTruyenDong, MaHTTD, TenHTTD FROM HeThongTruyenDong WHERE IDHeThongTruyenDong = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong(rs.getInt(1),
+                        rs.getString(2), rs.getString(3));
+                return mdHTTD;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int updateHTTDByMaGD(Model_HeThongTruyenDong HTTD) {
+        sql = "UPDATE HeThongTruyenDong SET TenHTTD = ? WHERE MaHTTD = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, HTTD.getLoaiLip());
+            ps.setString(2, HTTD.getMaHTTD());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteHTTDById(String ma) {
+        sql = "DELETE FROM HeThongTruyenDong WHERE MaHTTD = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return 0;
     }

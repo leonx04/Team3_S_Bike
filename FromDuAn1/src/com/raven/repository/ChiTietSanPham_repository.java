@@ -13,6 +13,7 @@ import com.raven.model.Model_KhungXe;
 import com.raven.model.Model_LopXe;
 import com.raven.model.Model_MauSac;
 import com.raven.model.Model_PhanhXe;
+import com.raven.model.Model_SanPham;
 import com.raven.model.Model_Thuonghieu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,18 +38,8 @@ public class ChiTietSanPham_repository {
     String sql = null;
 
     public List<Model_ChiTietSanPham> getALLCTSP() {
-        sql = "SELECT        ChiTietSanPham.IDCTSP, ChiTietSanPham.MaCTSP, \n"
-                + "ChiTietSanPham.HinhAnh, \n"
-                + "ChiTietSanPham.SoLuong,\n"
-                + "ChiTietSanPham.GiaTien, \n"
-                + "ThuongHieu.TenTH, \n"
-                + "MauSac.TenMS, \n"
-                + "GhiDong.TenGD, \n"
-                + "HeThongTruyenDong.TenHTTD, \n"
-                + "KhungXe.TenKX, \n"
-                + "LopXe.TenLX, \n"
-                + "PhanhXe.TenPX, \n"
-                + "BanhXe.TenBX\n"
+        sql = "SELECT        ChiTietSanPham.IDCTSP, ChiTietSanPham.MaCTSP, ChiTietSanPham.HinhAnh, ChiTietSanPham.SoLuong, ChiTietSanPham.GiaTien, ThuongHieu.TenTH, MauSac.TenMS, GhiDong.TenGD, KhungXe.TenKX, \n"
+                + "                         HeThongTruyenDong.TenHTTD, LopXe.TenLX, PhanhXe.TenPX, BanhXe.TenBX, SanPham.TenSP\n"
                 + "FROM            ChiTietSanPham INNER JOIN\n"
                 + "                         ThuongHieu ON ChiTietSanPham.IDThuongHieu = ThuongHieu.IDThuongHieu INNER JOIN\n"
                 + "                         MauSac ON ChiTietSanPham.IDMauSac = MauSac.IDMauSac INNER JOIN\n"
@@ -57,7 +48,8 @@ public class ChiTietSanPham_repository {
                 + "                         KhungXe ON ChiTietSanPham.IDKhungXe = KhungXe.IDKhungXe INNER JOIN\n"
                 + "                         LopXe ON ChiTietSanPham.IDLopXe = LopXe.IDLopXe INNER JOIN\n"
                 + "                         PhanhXe ON ChiTietSanPham.IDPhanhXe = PhanhXe.IDPhanhXe INNER JOIN\n"
-                + "                         BanhXe ON ChiTietSanPham.IDBanhXe = BanhXe.IDBanhXe\n"
+                + "                         BanhXe ON ChiTietSanPham.IDBanhXe = BanhXe.IDBanhXe INNER JOIN\n"
+                + "                         SanPham ON ChiTietSanPham.IDSanPham = SanPham.IDSanPham"
                 + "";
         List<Model_ChiTietSanPham> list = new ArrayList<>();
         try {
@@ -68,11 +60,12 @@ public class ChiTietSanPham_repository {
                 Model_Thuonghieu mdTH = new Model_Thuonghieu(null, rs.getString(6));
                 Model_MauSac mdMS = new Model_MauSac(null, rs.getString(7));
                 Model_GhiDong mdGD = new Model_GhiDong(null, rs.getString(8));
-                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong(null, rs.getString(9));
+                Model_HeThongTruyenDong mdHTTD = new Model_HeThongTruyenDong(1,null, rs.getString(9));
                 Model_KhungXe mdKX = new Model_KhungXe(null, rs.getString(10));
                 Model_LopXe mdLX = new Model_LopXe(null, rs.getString(11));
                 Model_PhanhXe mdPX = new Model_PhanhXe(null, rs.getString(12));
                 Model_BanhXe mdBX = new Model_BanhXe(null, rs.getString(13));
+                Model_SanPham mdSP = new Model_SanPham(null, rs.getString(14));
                 Model_ChiTietSanPham md_ctsp = new Model_ChiTietSanPham(
                         rs.getInt(1),
                         rs.getString(2),
@@ -86,8 +79,8 @@ public class ChiTietSanPham_repository {
                         mdKX,
                         mdLX,
                         mdPX,
-                        mdBX
-                );
+                        mdBX,
+                        mdSP);
                 list.add(md_ctsp);
             }
             return list;
@@ -97,10 +90,9 @@ public class ChiTietSanPham_repository {
         }
     }
 
-    public int insertSP(Model_ChiTietSanPham ctSP) {
-        String sql = "INSERT INTO ChiTietSanPham "
-                + "(MaCTSP, HinhAnh, SoLuong, GiaTien, TrangThai, IDThuongHieu, IDMauSac, IDGhiDong, IDHeThongTruyenDong, IDKhungXe, IDLopXe, IDPhanhXe, IDBanhXe, IDSanPham, Create_by, Update_at, Update_by, Deleted_by, Create_at) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public int insertCTSP(Model_ChiTietSanPham ctSP) {
+        String sql = "INSERT INTO ChiTietSanPham (MaCTSP, HinhAnh, SoLuong, GiaTien, TrangThai, IDThuongHieu, IDMauSac, IDGhiDong, IDHeThongTruyenDong, IDKhungXe, IDLopXe, IDPhanhXe, IDBanhXe, IDSanPham, Create_by, Update_at, Update_by, Deleted_by, Create_at) \n"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -111,12 +103,13 @@ public class ChiTietSanPham_repository {
             ps.setObject(5, ctSP.getThuongHieu().getId());
             ps.setObject(6, ctSP.getMauSac().getID());
             ps.setObject(7, ctSP.getGhiDong().getID());
-            ps.setObject(8, ctSP.getLoaiLip().getID());
+            System.out.println("loi la " + ctSP.getGhiDong().getID());
+            ps.setObject(8, ctSP.getLoaiLip().getIDHTTD());
             ps.setObject(9, ctSP.getTenKhungXe().getID());
             ps.setObject(10, ctSP.getTenLopXe().getID());
             ps.setObject(11, ctSP.getTenPhanhXe().getID());
             ps.setObject(12, ctSP.getTenBanhXe().getID());
-            ps.setObject(13, ctSP.getSanPham());
+            ps.setObject(13, ctSP.getSanPham().getID());
             ps.setObject(14, "DUNGNX");
             ps.setTimestamp(15, new Timestamp(System.currentTimeMillis()));
             ps.setObject(16, "DUNGNX");

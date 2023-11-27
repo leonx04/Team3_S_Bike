@@ -55,8 +55,8 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
 
     Model_GhiDong read() {
         Model_GhiDong gd = new Model_GhiDong();
-        gd.setMaGD(txtMa.getText());
-        gd.setLoaiGD(txtTen.getText());
+        gd.setMaGD(txtMa.getText().trim());
+        gd.setLoaiGD(txtTen.getText().trim());
         return gd;
     }
 
@@ -89,13 +89,14 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnADD = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -121,12 +122,17 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
 
         jButton4.setText("Thoát");
 
-        jButton3.setText("Cập nhật");
-
-        jButton2.setText("Thêm");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnADD.setText("Thêm");
+        btnADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnADDActionPerformed(evt);
             }
         });
 
@@ -142,6 +148,13 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         jLabel2.setText("Mã ");
 
         txtTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,22 +172,23 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                             .addComponent(txtMa))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(26, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton3)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton4)
-                        .addGap(0, 71, Short.MAX_VALUE))))
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnADD)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdate)
+                                .addGap(38, 38, 38)
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton4)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +209,10 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnADD)
+                    .addComponent(btnUpdate)
+                    .addComponent(jButton4)
+                    .addComponent(btnDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,7 +224,7 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         this.show(index);
     }//GEN-LAST:event_tblMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADDActionPerformed
         Model_GhiDong gd = read();
         GhiDong_repository repoGX = new GhiDong_repository();
         if (repoGX.InsertGD(gd) > 0) {
@@ -219,7 +234,41 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thất bại");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnADDActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật không?");
+        if (option == JOptionPane.YES_OPTION) {
+            Model_GhiDong gd = read();
+            GhiDong_repository repoGX = new GhiDong_repository();
+            if (repoGX.updateGhiDongByMaGD(gd) > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                Fill(repoGX.getAllGD());
+                this.clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+            }
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        String maGD = tbl.getValueAt(index, 1).toString();
+
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không?");
+        if (option == JOptionPane.YES_OPTION) {
+
+            GhiDong_repository repo = new GhiDong_repository();
+            if (repo.deleteGhiDongById(maGD) > 0) {
+                model.removeRow(index);
+                Fill(res.getAllGD());
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,9 +306,10 @@ public class GhiDong_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnADD;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

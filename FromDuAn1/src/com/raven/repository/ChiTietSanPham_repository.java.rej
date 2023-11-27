@@ -1,9 +1,0 @@
-diff a/FromDuAn1/src/com/raven/repository/ChiTietSanPham_repository.java b/FromDuAn1/src/com/raven/repository/ChiTietSanPham_repository.java	(rejected hunks)
-@@ -97,6 +97,7 @@
-         }
-     }
- 
-+    public int insertSP(Model_ChiTietSanPham ctSP) {
-         String sql = "INSERT INTO ChiTietSanPham "
-                 + "(MaCTSP, HinhAnh, SoLuong, GiaTien, TrangThai, IDThuongHieu, IDMauSac, IDGhiDong, IDHeThongTruyenDong, IDKhungXe, IDLopXe, IDPhanhXe, IDBanhXe, IDSanPham, Create_by, Update_at, Update_by, Deleted_by, Create_at) "
-                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

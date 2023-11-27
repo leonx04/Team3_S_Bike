@@ -61,6 +61,7 @@ public class GhiDong_repository {
         }
         return null;
     }
+
     public int InsertGD(Model_GhiDong ma) {
         sql = "INSERT INTO GhiDong(MaGD, TenGD) VALUES (?,?)";
         try {
@@ -75,4 +76,32 @@ public class GhiDong_repository {
         }
         return 0;
     }
+
+    public int updateGhiDongByMaGD(Model_GhiDong ghiDong) {
+        sql = "UPDATE GhiDong SET TenGD = ? WHERE MaGD = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ghiDong.getLoaiGD());
+            ps.setString(2, ghiDong.getMaGD());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteGhiDongById(String ma) {
+        sql = "DELETE FROM GhiDong WHERE MaGD = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }

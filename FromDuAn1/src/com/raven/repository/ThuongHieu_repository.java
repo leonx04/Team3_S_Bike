@@ -70,6 +70,7 @@ public class ThuongHieu_repository {
         }
         return -1;
     }
+
     public int InsertTH(Model_Thuonghieu ma) {
         sql = "INSERT INTO ThuongHieu(MaTH, TenTH) VALUES (?,?)";
         try {
@@ -81,6 +82,33 @@ public class ThuongHieu_repository {
         } catch (Exception e) {
             e.printStackTrace();
 
+        }
+        return 0;
+    }
+
+    public int updateThuongHieuByMaGD(Model_Thuonghieu TH) {
+        sql = "UPDATE ThuongHieu SET TenTH = ? WHERE MaTH = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, TH.getTenThuongHieu());
+            ps.setString(2, TH.getMa());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int deleteThuongHieuById(String ma) {
+        sql = "DELETE FROM ThuongHieu WHERE MaTH = ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return 0;
     }
