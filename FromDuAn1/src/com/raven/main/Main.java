@@ -12,8 +12,10 @@ import com.raven.component.Header_KhuyenMai;
 import com.raven.component.Header_NhanVien;
 import com.raven.component.Header_SanPham;
 import com.raven.component.Header_Thongke;
+import com.raven.component.Header_TrangChu;
 import com.raven.event.EventMenuSelected;
 import com.raven.view.From_KhuyenMai;
+import com.raven.view.From_TrangChu;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -36,6 +38,8 @@ public class Main extends javax.swing.JFrame {
             public void selected(int index) {
 //                System.out.println(""+index);
                 if (index == 1) {
+                    setFrom2(new Header_TrangChu() );
+                    setFrom(new From_TrangChu());
 
                 } else if (index == 3) {
                     setFrom2(new Header_BanHang() );
