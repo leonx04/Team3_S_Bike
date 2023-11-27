@@ -81,6 +81,14 @@ public class HoaDon_Model {
         this.nguoiTao = nguoiTao;
         this.ngaySua = ngaySua;
     }
+    
+    public HoaDon_Model(String maHD, String maNV, String tenKH, String trangThai, Date ngayTao) {
+        this.maHD = maHD;
+        this.maNV = maNV;
+        this.tenKH = tenKH;
+        this.trangThai = trangThai;
+        this.ngayTao = ngayTao;
+    }
 
     public int getSTT() {
         return STT;

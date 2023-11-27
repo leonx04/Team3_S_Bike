@@ -6,6 +6,7 @@
 package com.raven.main;
 
 import com.raven.event.EventMenuSelected;
+import com.raven.view.BanHang_JPanel;
 import com.raven.view.Bill_Jpanel;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
@@ -32,7 +33,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 1) {
 
                 } else if (index == 3) {
-
+                    setFrom(new BanHang_JPanel());
                 } else if (index == 9) {
                     setFrom(new Bill_Jpanel());
                 } else if (index == 11) {

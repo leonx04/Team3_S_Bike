@@ -3,7 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/repository/HoaDon_reponsitory.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/model/HoaDonTraHang_Model.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/main/Main.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/repository/BanHang_reponsitory.java</file>
             <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/view/Bill_Jpanel.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/view/BanHang_JPanel.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/model/SanPhamModel.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/model/HoaDon_Model.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/connectDB/DBConnect.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/connectDB/JdbcHelper.java</file>
+            <file>file:/H:/DU_AN_1/sourcetree/FromDuAn1/src/com/raven/view/JPanel_SanPham.java</file>
         </group>
     </open-files>
 </project-private>

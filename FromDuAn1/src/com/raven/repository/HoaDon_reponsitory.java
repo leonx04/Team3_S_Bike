@@ -7,6 +7,7 @@ package com.raven.repository;
 import com.raven.connectDB.DBConnect;
 import com.raven.connectDB.JdbcHelper;
 import com.raven.model.HoaDon_Model;
+import com.raven.model.SanPhamModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class HoaDon_reponsitory extends HoaDonInteface<HoaDon_Model, Integer> {
     public List<HoaDon_Model> getAllHD() {
         List<HoaDon_Model> list = new ArrayList<>();
         try {
-            sql = "SELECT HoaDon.MaHD, HoaDon.NgayDatHang, HoaDon.NgayNhanHang, HoaDon.TongTien, HinhThucThanhToan.TenHTTT, NhanVien.MaNV, KhachHang.TenKH, HoaDon.TenNguoiNhan, HoaDon.SDTNguoiNhanHang, HoaDon.TrangThai\n"
-                    + "FROM   HinhThucThanhToan INNER JOIN\n"
-                    + "             HoaDon ON HinhThucThanhToan.IDHinhThucThanhToan = HoaDon.IDHinhThucThanhToan INNER JOIN\n"
+            sql = "SELECT HoaDon.MaHD, HoaDon.NgayDatHang, HoaDon.NgayGuiHang, HoaDon.TongTien, HinhThucThanhToan.TenHTTT, NhanVien.MaNV, KhachHang.TenKH, HoaDon.TenNguoiNhan, HoaDon.SDTNguoiNhanHang, HoaDon.TrangThai\n"
+                    + "FROM   HoaDon INNER JOIN\n"
+                    + "             HinhThucThanhToan ON HoaDon.IDHinhThucThanhToan = HinhThucThanhToan.IDHinhThucThanhToan INNER JOIN\n"
                     + "             KhachHang ON HoaDon.IDKhachHang = KhachHang.IDKhachHang INNER JOIN\n"
                     + "             NhanVien ON HoaDon.IDNhanVien = NhanVien.IDNhanVien";
             con = DBConnect.getConnection();
@@ -119,6 +120,58 @@ public class HoaDon_reponsitory extends HoaDonInteface<HoaDon_Model, Integer> {
         return list;
     }
 
+    public List<SanPhamModel> getAllHoaDonChiTiet(String ma) {
+        List<SanPhamModel> list = new ArrayList<>();
+        try {
+            sql = "SELECT SanPham.MaSP, SanPham.TenSP, SanPham.SoLuong, ChiTietSanPham.GiaTien\n"
+                    + "FROM   ChiTietSanPham INNER JOIN\n"
+                    + "             HoaDonChiTiet ON ChiTietSanPham.IDCTSP = HoaDonChiTiet.IDCTSP INNER JOIN\n"
+                    + "             HoaDon ON HoaDonChiTiet.IDHoaDon = HoaDon.IDHoaDon INNER JOIN\n"
+                    + "             SanPham ON ChiTietSanPham.IDSanPham = SanPham.IDSanPham INNER JOIN\n"
+                    + "NhanVien ON HoaDon.IDNhanVien = NhanVien.IDNhanVien\n"
+                    + "where maNV = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+                list.add(sp);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<SanPhamModel> getSanPham(String ma) {
+        List<SanPhamModel> list = new ArrayList<>();
+        try {
+            sql = "SELECT SanPham.MaSP, SanPham.TenSP, ThuongHieu.TenTH, MauSac.TenMS, SanPham.SoLuong, ChiTietSanPham.GiaTien\n"
+                    + "FROM   HoaDon INNER JOIN\n"
+                    + "             NhanVien ON HoaDon.IDNhanVien = NhanVien.IDNhanVien INNER JOIN\n"
+                    + "             HoaDonChiTiet ON HoaDon.IDHoaDon = HoaDonChiTiet.IDHoaDon INNER JOIN\n"
+                    + "             ChiTietSanPham INNER JOIN\n"
+                    + "             SanPham ON ChiTietSanPham.IDSanPham = SanPham.IDSanPham ON HoaDonChiTiet.IDCTSP = ChiTietSanPham.IDCTSP INNER JOIN\n"
+                    + "             MauSac ON ChiTietSanPham.IDMauSac = MauSac.IDMauSac INNER JOIN\n"
+                    + "             ThuongHieu ON ChiTietSanPham.IDThuongHieu = ThuongHieu.IDThuongHieu\n"
+                    + "			 where maNV = ?";
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, ma);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                list.add(sp);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     @Override
     protected List<HoaDon_Model> selectBySql(String sql, Object... args) {
         List<HoaDon_Model> list = new ArrayList<>();
@@ -165,17 +218,6 @@ public class HoaDon_reponsitory extends HoaDonInteface<HoaDon_Model, Integer> {
         return list.size() > 0 ? list.get(0) : null;
     }
 
-//    public List<HoaDon_Model> selectAll(String maHD) {
-//        String sql = "SELECT HoaDon.MaHD, NhanVien.MaNV, KhachHang.TenKH, HoaDon.TenNguoiNhan, HoaDon.SDTNguoiNhanHang, HoaDon.DiaChiNhanHang, HoaDon.TrangThai, KhuyenMai.MucGiamGia, HoaDon.TongTien, HoaDon.PhiVanChuyen, HoaDon.Create_at, HoaDon.Update_by, \n"
-//                + "             HoaDon.Update_at\n"
-//                + "FROM   HoaDon INNER JOIN\n"
-//                + "             KhachHang ON HoaDon.IDKhachHang = KhachHang.IDKhachHang INNER JOIN\n"
-//                + "             KhuyenMai ON HoaDon.IDKhuyenMai = KhuyenMai.IDKhuyenMai INNER JOIN\n"
-//                + "             NhanVien ON HoaDon.IDNhanVien = NhanVien.IDNhanVien\n"
-//                + "			 where HoaDon.MaHD = ?";
-//        return selectBySql(sql);
-//    }
-
     @Override
     public List<HoaDon_Model> selectAll() {
         String sql = "SELECT HoaDon.MaHD, NhanVien.MaNV, KhachHang.TenKH, HoaDon.TenNguoiNhan, HoaDon.SDTNguoiNhanHang, HoaDon.DiaChiNhanHang, HoaDon.TrangThai, KhuyenMai.MucGiamGia, HoaDon.TongTien, HoaDon.PhiVanChuyen, HoaDon.Create_at, HoaDon.Update_by, \n"
@@ -186,7 +228,5 @@ public class HoaDon_reponsitory extends HoaDonInteface<HoaDon_Model, Integer> {
                 + "             NhanVien ON HoaDon.IDNhanVien = NhanVien.IDNhanVien\n";
         return selectBySql(sql);
     }
-
-    
 
 }
