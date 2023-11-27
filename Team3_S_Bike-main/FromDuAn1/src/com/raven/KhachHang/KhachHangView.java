@@ -105,7 +105,7 @@ public class KhachHangView extends javax.swing.JPanel {
         String email = txt_email.getText();
         String diachi = txt_diaChi.getText();
         String ngaySinh = txt_ngaySinh.getText();
-        String trangThai = txt_trangThai.getText();
+          String trangThai = txt_trangThai.getText();
         return new Model_KhachHang(makh, tenkh, sodt, email, diachi, ngaySinh, trangThai);
     }
 
