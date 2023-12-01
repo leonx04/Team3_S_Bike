@@ -14,6 +14,7 @@ import com.raven.component.Header_SanPham;
 import com.raven.component.Header_Thongke;
 import com.raven.event.EventMenuSelected;
 import com.raven.swing.XImage;
+import com.raven.view.Bill_Jpanel;
 import com.raven.view.From_KhuyenMai;
 import com.raven.view.JPanel_SanPham;
 import java.awt.Color;
@@ -44,7 +45,7 @@ public class Main1 extends javax.swing.JFrame {
                     setFrom2(new Header_BanHang() );
                 } else if (index == 9) {
                     setFrom2(new Header_HoaDon() );
-
+                    setFrom(new Bill_Jpanel());
                 } else if (index == 11) {
                     setFrom2(new Header_SanPham() );
                     setFrom(new JPanel_SanPham());

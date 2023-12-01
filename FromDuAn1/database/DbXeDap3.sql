@@ -305,6 +305,7 @@ CREATE TABLE [dbo].[NhanVien](
 	[SoDienThoai] [nchar](20) NULL,
 	[SoCCCD] [nchar](20) NULL,
 	[Email] [nvarchar](max) NULL,
+	[MatKhau] [nchar](20) NULL,
 	[NgaySinh] [date] NULL,
 	[GioiTinh] [nvarchar](50) NULL,
 	[ChucVu] [nvarchar](max) NULL,
