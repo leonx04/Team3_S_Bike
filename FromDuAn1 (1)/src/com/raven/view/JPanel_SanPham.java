@@ -58,9 +58,6 @@ public class JPanel_SanPham extends javax.swing.JPanel {
     private int index = -1;
     JFileChooser fileChooser = new JFileChooser();
 
-    /**
-     * Creates new form NewJPanel
-     */
     public JPanel_SanPham() {
         initComponents();
         this.fillTable1(sp_rs.getALLSP());
@@ -591,9 +588,6 @@ public class JPanel_SanPham extends javax.swing.JPanel {
         sorter.sort();
     }
 
-    /**
-     *
-     */
     @SuppressWarnings("unchecked")
 
     private void initComponents() {
@@ -924,30 +918,30 @@ public class JPanel_SanPham extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null }
+                new Object[][]{
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null}
                 },
-                new String[] {
-                        "STT", "Mã sản phẩm", "Tên sản phẩm", "Mã hex", "Model", "Số Lượng", "Trạng thái"
+                new String[]{
+                    "STT", "Mã sản phẩm", "Tên sản phẩm", "Mã hex", "Model", "Số Lượng", "Trạng thái"
                 }));
         tblSanPham.setGridColor(new java.awt.Color(204, 204, 204));
         tblSanPham.setSelectionBackground(new java.awt.Color(153, 153, 255));
@@ -960,7 +954,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblSanPham);
 
         cboTrangThai.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang bán", "Đã ngừng bán" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Đang bán", "Đã ngừng bán"}));
 
         txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1088,37 +1082,37 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         tblCTSP.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblCTSP.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+                new Object[][]{
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
                 },
-                new String[] {
-                        "STT", "Mã CTSP", "Hình ảnh", "Số lượng", "Giá tiền", "Thương hiệu", "Màu sắc", "Ghi đông",
-                        "Líp xe", "Khung xe", "Lốp xe", "Phanh xe", "Bánh xe", "Tên sản phẩm"
+                new String[]{
+                    "STT", "Mã CTSP", "Hình ảnh", "Số lượng", "Giá tiền", "Thương hiệu", "Màu sắc", "Ghi đông",
+                    "Líp xe", "Khung xe", "Lốp xe", "Phanh xe", "Bánh xe", "Tên sản phẩm"
                 }));
         tblCTSP.setGridColor(new java.awt.Color(204, 204, 204));
         tblCTSP.setPreferredSize(new java.awt.Dimension(975, 100));
@@ -1171,7 +1165,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboThuongHieu.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboThuongHieu.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboThuongHieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboThuongHieuActionPerformed(evt);
@@ -1185,7 +1179,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboGhiDong.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboGhiDong.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboGhiDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboGhiDongActionPerformed(evt);
@@ -1199,7 +1193,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboLipXe.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboLipXe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboLipXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboLipXeActionPerformed(evt);
@@ -1213,7 +1207,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboKhungXe.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboKhungXe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboKhungXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboKhungXeActionPerformed(evt);
@@ -1227,7 +1221,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboLopXe.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboLopXe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboLopXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboLopXeActionPerformed(evt);
@@ -1273,7 +1267,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboPhanhXe.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboPhanhXe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboPhanhXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboPhanhXeActionPerformed(evt);
@@ -1287,7 +1281,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboBanhXe.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboBanhXe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Tilte 1", "Tilte 2", "Tilte 3", "Tilte 4"}));
         cboBanhXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboBanhXeActionPerformed(evt);
@@ -1430,7 +1424,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboMauSac.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cboMauSac.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         cboMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cboMauSacMouseEntered(evt);
@@ -1465,7 +1459,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
         cboSanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSanPham.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         jPanel15.add(cboSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 216, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1762,30 +1756,30 @@ public class JPanel_SanPham extends javax.swing.JPanel {
                 new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tblTT.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
+                new Object[][]{
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null}
                 },
-                new String[] {
-                        "STT", "Mã thuộc tính", "Tên thuộc tính"
+                new String[]{
+                    "STT", "Mã thuộc tính", "Tên thuộc tính"
                 }));
         tblTT.setShowGrid(true);
         tblTT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1864,9 +1858,9 @@ public class JPanel_SanPham extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addComponent(tabSP, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
                                 .addContainerGap()));
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnDeleteCTSPActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCTSPActionPerformed
+    private void btnDeleteCTSPActionPerformed(java.awt.event.ActionEvent evt) {
         Model_ChiTietSanPham CTsp = this.read2();
         String MaSP = tblCTSP.getValueAt(index, 1).toString();
         ChiTietSanPham_repository repoSP = new ChiTietSanPham_repository();
@@ -1878,55 +1872,55 @@ public class JPanel_SanPham extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
         }
-    }// GEN-LAST:event_btnDeleteCTSPActionPerformed
+    }
 
-    private void btnAddBanhXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddBanhXeActionPerformed
+    private void btnAddBanhXeActionPerformed(java.awt.event.ActionEvent evt) {
         this.openBanhXe();
-    }// GEN-LAST:event_btnAddBanhXeActionPerformed
+    }
 
-    private void btnAddGDActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddGDActionPerformed
+    private void btnAddGDActionPerformed(java.awt.event.ActionEvent evt) {
         this.openGhiDong();
-    }// GEN-LAST:event_btnAddGDActionPerformed
+    }
 
-    private void btnAddLXActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddLXActionPerformed
+    private void btnAddLXActionPerformed(java.awt.event.ActionEvent evt) {
         this.openHTTD();
-    }// GEN-LAST:event_btnAddLXActionPerformed
+    }
 
-    private void btnAddKhungXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddKhungXeActionPerformed
+    private void btnAddKhungXeActionPerformed(java.awt.event.ActionEvent evt) {
         this.openKhungXe();
-    }// GEN-LAST:event_btnAddKhungXeActionPerformed
+    }
 
-    private void btnAddLopXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddLopXeActionPerformed
+    private void btnAddLopXeActionPerformed(java.awt.event.ActionEvent evt) {
         this.openLopXe();
-    }// GEN-LAST:event_btnAddLopXeActionPerformed
+    }
 
-    private void btnAddPhanhXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddPhanhXeActionPerformed
+    private void btnAddPhanhXeActionPerformed(java.awt.event.ActionEvent evt) {
         this.openPhanhXe();
-    }// GEN-LAST:event_btnAddPhanhXeActionPerformed
+    }
 
-    private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblHinhAnhMouseClicked
-        // TODO add your handling code here:
-    }// GEN-LAST:event_lblHinhAnhMouseClicked
+    private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {
 
-    private void lblHinhAnhMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblHinhAnhMousePressed
+    }
+
+    private void lblHinhAnhMousePressed(java.awt.event.MouseEvent evt) {
         this.chonAnh();
-    }// GEN-LAST:event_lblHinhAnhMousePressed
+    }
 
-    private void rdoThuongHieuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdoThuongHieuActionPerformed
+    private void rdoThuongHieuActionPerformed(java.awt.event.ActionEvent evt) {
         fillTH();
-    }// GEN-LAST:event_rdoThuongHieuActionPerformed
+    }
 
-    private void rdoPhanhXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdoPhanhXeActionPerformed
+    private void rdoPhanhXeActionPerformed(java.awt.event.ActionEvent evt) {
         fillPX();
-    }// GEN-LAST:event_rdoPhanhXeActionPerformed
+    }
 
-    private void rdoGhiDongActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdoGhiDongActionPerformed
+    private void rdoGhiDongActionPerformed(java.awt.event.ActionEvent evt) {
         fillGD();
-    }// GEN-LAST:event_rdoGhiDongActionPerformed
+    }
 
-    private void rdoLopXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdoLopXeActionPerformed
+    private void rdoLopXeActionPerformed(java.awt.event.ActionEvent evt) {
         fillLX();
-    }// GEN-LAST:event_rdoLopXeActionPerformed
+    }
 
     private void rdoKhungXeActionPerformed(java.awt.event.ActionEvent evt) {
         fillKX();
@@ -1934,7 +1928,7 @@ public class JPanel_SanPham extends javax.swing.JPanel {
 
     private void rdoBanhXeActionPerformed(java.awt.event.ActionEvent evt) {
         fillBX();
-    }// GEN-LAST:event_rdoBanhXeActionPerformed
+    }
 
     private void rdoLipXeActionPerformed(java.awt.event.ActionEvent evt) {
         fillHTTD();
@@ -1963,12 +1957,12 @@ public class JPanel_SanPham extends javax.swing.JPanel {
         }
     }
 
-    private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtTimKiemCTSPKeyReleased
+    private void txtTimKiemCTSPKeyReleased(java.awt.event.KeyEvent evt) {
         String query = txtTimKiemCTSP.getText();
         filterCTSP(query);
     }
 
-    private void btnThemTTActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnThemTTActionPerformed
+    private void btnThemTTActionPerformed(java.awt.event.ActionEvent evt) {
         String MaTTDT = txtMaTT.getText();
         String TenTTDT = txtTenTT.getText();
 
